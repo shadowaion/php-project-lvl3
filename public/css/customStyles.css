@@ -23,6 +23,16 @@ body {background-color: silver;}
   font-size: 20px;
 }
 
+.button-fonts {
+  padding: 0px;
+  font-size: 28px;
+}
+
+ul li.list-group-item {
+  padding: 5px 20px;
+  font-size: 24px;
+}
+
 .border-color-red {
   border: 2px red solid;
 }

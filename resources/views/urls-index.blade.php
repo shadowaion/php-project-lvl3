@@ -20,13 +20,18 @@
     </head>
     <body class="antialiased">
     <div class="container-fluid main-container border-color-black">
+        <div class="row justify-content-center border-color-purple">
+            <div class="col-lg-8 border-color-red">
+                <a type="button" target="_top" class="btn btn-block btn-light button-fonts" href="{{route('mainPage')}}">Home</a>
+            </div>
+        </div>
         <div class="row justify-content-center border-color-yellow">
-            <div class="col-lg-7 border-color-red">
-                <form action="{{route('urlsList')}}" method="post">
-                    @csrf <!-- {{ csrf_field() }} -->
-                    <input class="url-input-text" type="text" name="url[name]" placeholder="Type the URL">
-                    <input class="url-input-submit" type="submit" value="Check">
-                </form>
+            <div class="col-lg-8 border-color-red">
+                <ul class="list-group">
+                @foreach($urls as $url)
+                    <a href="{{route('urlsShow', ['id' => $url->id])}}"><li class="list-group-item">{{ $url->name }}</li></a>
+                @endforeach
+                </ul>
             </div>
         </div>
     </div>
