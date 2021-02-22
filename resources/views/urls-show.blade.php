@@ -36,6 +36,11 @@
             <div class="col-lg-4">Updated at:</div>
             <div class="col-lg-4">{{ $urls[0]->updated_at }}</div>
         </div>-->
+        <div class="row justify-content-center border-color-blueviolet">
+            <div class="col-lg-8 border-color-red">
+                @include('flash::message')
+            </div>
+        </div>
         <div class="row justify-content-center border-color-purple">
             <div class="col-lg-8">
                 <table class="table table-bordered black-border">
@@ -59,6 +64,50 @@
                   </tbody>
                 </table>
             </div>
+        </div>
+        <div class="row justify-content-center border-color-yellow mt-5">
+            <div class="col-lg-8 d-lg-flex justify-content-between">
+                <div class="col-lg-2 p-0 button-fonts">
+                    Checks:
+                </div>
+                <div class="col-lg-2 p-0">
+                    <a type="button" target="_top" class="btn btn-block btn-primary button-fonts" href="{{route('mainPage')}}">Start check</a>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center border-color-blue">
+        @if (isset($urlChecks))
+            <div class="col-lg-8 mt-4">
+                <table class="table table-bordered black-border">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Status code</th>
+                            <th scope="col">h1</th>
+                            <th scope="col">keyword</th>
+                            <th scope="col">Discription</th>
+                            <th scope="col">Created at</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($urlChecks as $urlCheck)
+                        <tr>
+                            <th scope="row">$urlCheck->id</th>
+                            <td>$urlCheck->status_code</td>
+                            <td>$urlCheck->h1</td>
+                            <td>$urlCheck->keyword</td>
+                            <td>$urlCheck->description</td>
+                            <td>$urlCheck->created_at</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @else
+            <div class="col-lg-8 button-fonts mt-4">
+                No checks was found!
+            </div>
+        @endif
         </div>
     </div>
     </body>

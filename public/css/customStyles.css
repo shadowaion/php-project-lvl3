@@ -23,6 +23,10 @@ body {background-color: silver;}
   font-size: 20px;
 }
 
+.mt-skip {
+  margin-top: 50px;
+}
+
 .button-fonts {
   padding: 0px;
   font-size: 28px;

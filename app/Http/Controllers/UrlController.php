@@ -45,14 +45,14 @@ class UrlController extends Controller
     {
         $parsedUrl = parse_url($request->input('url.name'));
 
-        echo "\n--------------------Inside controller----------------------\n";
-        print_r($request->input('url.name'));
-        echo "\n--------------------Inside controller----------------------\n";
-        print_r($request->name);
+        // echo "\n--------------------Inside controller----------------------\n";
+        // print_r($request->input('url.name'));
+        // echo "\n--------------------Inside controller----------------------\n";
+        // print_r($request->name);
 
         $normalizedScheme = mb_strtolower($parsedUrl["scheme"]);
         $normalizedHost = mb_strtolower($parsedUrl["host"]);
-        $normalizedUrlName = "{$normalizedScheme}://{$normalizedHost}/";
+        $normalizedUrlName = "{$normalizedScheme}://{$normalizedHost}";
         $createdUpdatedAt = Carbon::now()->toDateTimeString();
 
         try {
@@ -122,5 +122,41 @@ class UrlController extends Controller
     public function destroy($id)
     {
         return view('welcome');//
+    }
+    /**
+     * Check the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function check($id)
+    {
+        $urls = DB::table('urls')
+                ->select(DB::raw('*'))
+                ->where('id', '=', $id)
+                ->orderby('name')
+                ->get();
+
+        try {
+            DB::table('url_checks')
+            ->where('name', $normalizedUrlName)
+            ->upsert([
+                ['url_id' => $id,
+                'updated_at' => $createdUpdatedAt, 
+                'created_at' => $createdUpdatedAt],
+            ], ['id'], ['updated_at']);
+
+            flash('Finished check!')->success();
+        } catch (Exception $e) {
+            $errorMessage = "Error: {$e->getMessage()}";
+            flash($errorMessage)->error();
+        }
+        $urlChecks = DB::table('url_checks')
+        ->select(DB::raw('*'))
+        ->where('url_id', '=', $id)
+        ->orderby('create_at', 'desc')
+        ->get();
+    
+        return view('urls-show', ['urls' => $urls, 'urlChecks' => $urlChecks]);//
     }
 }
