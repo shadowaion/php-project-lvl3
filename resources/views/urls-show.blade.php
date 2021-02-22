@@ -20,21 +20,44 @@
     </head>
     <body class="antialiased">
     <div class="container-fluid main-container border-color-black">
-        <div class="row justify-content-center border-color-purple">
-            <div class="col-lg-8 border-color-red">
-                <a type="button" target="_top" class="btn btn-block btn-light button-fonts" href="{{route('mainPage')}}">Home</a>
-            </div>
+        <!--<div class="row justify-content-center border-color-blueviolet">
+            <div class="col-lg-4">ID:</div>
+            <div class="col-lg-4">{{ $urls[0]->id }}</div>
         </div>
-        <div class="row justify-content-center border-color-yellow">
-            <div class="col-lg-8 border-color-red">
-                @include('flash::message')
-            </div>
-            <div class="col-lg-8 border-color-red">
-                <ul class="list-group">
-                @foreach($urls as $url)
-                    <a href="{{route('urls.show', ['id' => $url->id])}}"><li class="list-group-item">{{ $url->name }}</li></a>
-                @endforeach
-                </ul>
+        <div class="row justify-content-center border-color-blueviolet">
+            <div class="col-lg-4">Name:</div>
+            <div class="col-lg-4">{{ $urls[0]->name }}</div>
+        </div>
+        <div class="row justify-content-center border-color-blueviolet">
+            <div class="col-lg-4">Created at:</div>
+            <div class="col-lg-4">{{ $urls[0]->created_at }}</div>
+        </div>
+        <div class="row justify-content-center border-color-blueviolet">
+            <div class="col-lg-4">Updated at:</div>
+            <div class="col-lg-4">{{ $urls[0]->updated_at }}</div>
+        </div>-->
+        <div class="row justify-content-center border-color-purple">
+            <div class="col-lg-8">
+                <table class="table table-bordered black-border">
+                  <tbody>
+                    <tr>
+                      <td>ID:</td>
+                      <td>{{ $urls[0]->id }}</td>
+                    </tr>
+                    <tr>
+                      <td>Name:</td>
+                      <td>{{ $urls[0]->name }}</td>
+                    </tr>
+                    <tr>
+                      <td>Created at:</td>
+                      <td>{{ $urls[0]->created_at }}</td>
+                    </tr>
+                    <tr>
+                      <td>Updated at:</td>
+                      <td>{{ $urls[0]->updated_at }}</td>
+                    </tr>
+                  </tbody>
+                </table>
             </div>
         </div>
     </div>

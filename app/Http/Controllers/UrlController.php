@@ -20,7 +20,7 @@ class UrlController extends Controller
              ->select(DB::raw('*'))
              ->orderby('name')
              ->get();
-
+        //var_dump($urls);
         return view('urls-index', ['urls' => $urls]);//
     }
 
@@ -44,20 +44,33 @@ class UrlController extends Controller
     public function store(Request $request)
     {
         $parsedUrl = parse_url($request->input('url.name'));
+
+        echo "\n--------------------Inside controller----------------------\n";
+        print_r($request->input('url.name'));
+        echo "\n--------------------Inside controller----------------------\n";
+        print_r($request->name);
+
         $normalizedScheme = mb_strtolower($parsedUrl["scheme"]);
         $normalizedHost = mb_strtolower($parsedUrl["host"]);
         $normalizedUrlName = "{$normalizedScheme}://{$normalizedHost}/";
         $createdUpdatedAt = Carbon::now()->toDateTimeString();
 
-        DB::table('urls')
-        ->where('name', $normalizedUrlName)
-        ->upsert([
-            ['name' => $normalizedUrlName,
-            'updated_at' => $createdUpdatedAt, 
-            'created_at' => $createdUpdatedAt],
-        ], ['name'], ['updated_at']);
+        try {
+            DB::table('urls')
+            ->where('name', $normalizedUrlName)
+            ->upsert([
+                ['name' => $normalizedUrlName,
+                'updated_at' => $createdUpdatedAt, 
+                'created_at' => $createdUpdatedAt],
+            ], ['name'], ['updated_at']);
 
-        return Redirect()->route('urlsList');//
+            flash('Website successfully added!')->success();
+        } catch (Exception $e) {
+            $errorMessage = "Error: {$e->getMessage()}";
+            flash($errorMessage)->error();
+        }
+
+        return Redirect()->route('urls.index');//
     }
 
     /**
@@ -68,7 +81,13 @@ class UrlController extends Controller
      */
     public function show($id)
     {
-        return view('welcome');//
+        $urls = DB::table('urls')
+             ->select(DB::raw('*'))
+             ->where('id', '=', $id)
+             ->orderby('name')
+             ->get();
+        //var_dump($urls);
+        return view('urls-show', ['urls' => $urls]);//
     }
 
     /**

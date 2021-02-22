@@ -16,10 +16,14 @@ use App\Http\Controllers\UrlController;
 
 Route::get('/', function () {
     return view('main');
-})->name('mainPage');;
+})->name('mainPage');
 
-Route::get('/urls', [UrlController::class, 'index'])->name('urlsList');
+Route::get('/testRedirect', function () {
+    return Redirect()->route('urls.index');
+})->name('redirectTest');
 
-Route::post('/urls', [UrlController::class, 'store'])->name('urlsList');
+Route::get('/urls', [UrlController::class, 'index'])->name('urls.index');
 
-Route::get('/urls/{id}', [UrlController::class, 'show'])->name('urlsShow');
+Route::post('/urls', [UrlController::class, 'store'])->name('urls.store');
+
+Route::get('/urls/{id}', [UrlController::class, 'show'])->name('urls.show');

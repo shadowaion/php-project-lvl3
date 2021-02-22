@@ -22,10 +22,10 @@
     <div class="container-fluid main-container border-color-black">
         <div class="row justify-content-center border-color-yellow">
             <div class="col-lg-7 border-color-red">
-                <form action="{{route('urlsList')}}" method="post">
+                <form action="{{route('urls.store')}}" method="post">
                     @csrf <!-- {{ csrf_field() }} -->
-                    <input class="url-input-text" type="text" name="url[name]" placeholder="Type the URL">
-                    <input class="url-input-submit" type="submit" value="Check">
+                    <input class="url-input-text" required type="text" name="url[name]" placeholder="Type the URL">
+                    <input class="url-input-submit" type="submit" name="submit" value="Check">
                 </form>
             </div>
         </div>
