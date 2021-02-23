@@ -19,24 +19,12 @@
         </style>
     </head>
     <body class="antialiased">
-    <div class="container-fluid main-container border-color-black">
-        <!--<div class="row justify-content-center border-color-blueviolet">
-            <div class="col-lg-4">ID:</div>
-            <div class="col-lg-4">{{ $urls[0]->id }}</div>
+    <div class="container-fluid border-color-black">
+        <div class="row justify-content-left border-color-yellow menu-dark-background">
+            <div class="col-lg-1 text-center button-fonts"><a href="{{route('mainPage')}}">Main</a></div>
+            <div class="col-lg-1 text-center button-fonts"><a href="{{route('urls.index')}}">Websites</a></div>
         </div>
-        <div class="row justify-content-center border-color-blueviolet">
-            <div class="col-lg-4">Name:</div>
-            <div class="col-lg-4">{{ $urls[0]->name }}</div>
-        </div>
-        <div class="row justify-content-center border-color-blueviolet">
-            <div class="col-lg-4">Created at:</div>
-            <div class="col-lg-4">{{ $urls[0]->created_at }}</div>
-        </div>
-        <div class="row justify-content-center border-color-blueviolet">
-            <div class="col-lg-4">Updated at:</div>
-            <div class="col-lg-4">{{ $urls[0]->updated_at }}</div>
-        </div>-->
-        <div class="row justify-content-center border-color-blueviolet">
+        <div class="row justify-content-center border-color-blueviolet main-container">
             <div class="col-lg-8 border-color-red">
                 @include('flash::message')
             </div>
@@ -71,7 +59,11 @@
                     Checks:
                 </div>
                 <div class="col-lg-2 p-0">
-                    <a type="button" target="_top" class="btn btn-block btn-primary button-fonts" href="{{route('mainPage')}}">Start check</a>
+                    <form action="{{route('urls.check', ['id' => $urls[0]->id])}}" method="post">
+                        @csrf <!-- {{ csrf_field() }} -->
+                        <input type="hidden" name="url[id]" value="{{$urls[0]->id}}">
+                        <input class="btn btn-block btn-primary button-fonts" type="submit" name="submit" value="Start check">
+                    </form>
                 </div>
             </div>
         </div>
@@ -92,12 +84,12 @@
                     <tbody>
                     @foreach($urlChecks as $urlCheck)
                         <tr>
-                            <th scope="row">$urlCheck->id</th>
-                            <td>$urlCheck->status_code</td>
-                            <td>$urlCheck->h1</td>
-                            <td>$urlCheck->keyword</td>
-                            <td>$urlCheck->description</td>
-                            <td>$urlCheck->created_at</td>
+                            <th scope="row">{{$urlCheck->id}}</th>
+                            <td>{{$urlCheck->status_code}}</td>
+                            <td>{{$urlCheck->h1}}</td>
+                            <td>{{$urlCheck->keyword}}</td>
+                            <td>{{$urlCheck->description}}</td>
+                            <td>{{$urlCheck->created_at}}</td>
                         </tr>
                     @endforeach
                     </tbody>

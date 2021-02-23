@@ -17,9 +17,12 @@ class UrlController extends Controller
     public function index()
     {
         $urls = DB::table('urls')
-             ->select(DB::raw('*'))
-             ->orderby('name')
-             ->get();
+            ->leftJoin('url_checks', 'urls.id', '=', 'url_checks.url_id')
+            ->select(DB::raw('DISTINCT ON (urls.name) urls.*, url_checks.created_at as last_check_date'))
+            ->orderby('urls.name')
+            ->orderby('urls.id')
+            ->orderby('url_checks.created_at', 'desc')
+            ->get();
         //var_dump($urls);
         return view('urls-index', ['urls' => $urls]);//
     }
@@ -57,7 +60,7 @@ class UrlController extends Controller
 
         try {
             DB::table('urls')
-            ->where('name', $normalizedUrlName)
+            ->where('name', '=', $normalizedUrlName)
             ->upsert([
                 ['name' => $normalizedUrlName,
                 'updated_at' => $createdUpdatedAt, 
@@ -82,12 +85,18 @@ class UrlController extends Controller
     public function show($id)
     {
         $urls = DB::table('urls')
-             ->select(DB::raw('*'))
-             ->where('id', '=', $id)
-             ->orderby('name')
-             ->get();
+            ->select(DB::raw('*'))
+            ->where('id', '=', $id)
+            ->orderby('name')
+            ->get();
+        
+        $urlChecks = DB::table('url_checks')
+            ->select(DB::raw('*'))
+            ->where('url_id', '=', $id)
+            ->orderby('created_at', 'desc')
+            ->get();
         //var_dump($urls);
-        return view('urls-show', ['urls' => $urls]);//
+        return view('urls-show', ['urls' => $urls, 'urlChecks' => $urlChecks]);//
     }
 
     /**
@@ -131,6 +140,8 @@ class UrlController extends Controller
      */
     public function check($id)
     {
+        $createdUpdatedAt = Carbon::now()->toDateTimeString();
+
         $urls = DB::table('urls')
                 ->select(DB::raw('*'))
                 ->where('id', '=', $id)
@@ -139,7 +150,6 @@ class UrlController extends Controller
 
         try {
             DB::table('url_checks')
-            ->where('name', $normalizedUrlName)
             ->upsert([
                 ['url_id' => $id,
                 'updated_at' => $createdUpdatedAt, 
@@ -151,12 +161,7 @@ class UrlController extends Controller
             $errorMessage = "Error: {$e->getMessage()}";
             flash($errorMessage)->error();
         }
-        $urlChecks = DB::table('url_checks')
-        ->select(DB::raw('*'))
-        ->where('url_id', '=', $id)
-        ->orderby('create_at', 'desc')
-        ->get();
     
-        return view('urls-show', ['urls' => $urls, 'urlChecks' => $urlChecks]);//
+        return Redirect()->route('urls.show', ['id' => $id]);//
     }
 }

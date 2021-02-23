@@ -19,22 +19,36 @@
         </style>
     </head>
     <body class="antialiased">
-    <div class="container-fluid main-container border-color-black">
-        <div class="row justify-content-center border-color-purple">
-            <div class="col-lg-8 border-color-red">
-                <a type="button" target="_top" class="btn btn-block btn-light button-fonts" href="{{route('mainPage')}}">Home</a>
-            </div>
+    <div class="container-fluid border-color-black">
+        <div class="row justify-content-left border-color-yellow menu-dark-background">
+            <div class="col-lg-1 text-center button-fonts"><a href="{{route('mainPage')}}">Main</a></div>
+            <div class="col-lg-1 text-center button-fonts"><a href="{{route('urls.index')}}">Websites</a></div>
         </div>
-        <div class="row justify-content-center border-color-yellow">
+        <div class="row justify-content-center border-color-yellow main-container">
             <div class="col-lg-8 border-color-red">
                 @include('flash::message')
             </div>
             <div class="col-lg-8 border-color-red">
-                <ul class="list-group">
-                @foreach($urls as $url)
-                    <a href="{{route('urls.show', ['id' => $url->id])}}"><li class="list-group-item">{{ $url->name }}</li></a>
-                @endforeach
-                </ul>
+                <table class="table table-bordered black-border">
+                    <thead>
+                        <tr>
+                            <th class="col-lg-1" scope="col">ID</th>
+                            <th class="col-lg-8" scope="col">Name</th>
+                            <th class="col-lg-3" scope="col">Last check date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($urls as $url)
+                        <tr>
+                            <th scope="row">{{$url->id}}</th>
+                            <td>
+                                <a href="{{route('urls.show', ['id' => $url->id])}}">{{$url->name}}</a>
+                            </td>
+                            <td>{{$url->last_check_date}}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

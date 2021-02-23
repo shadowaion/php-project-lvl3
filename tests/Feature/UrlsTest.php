@@ -30,35 +30,35 @@ class UrlsTest extends TestCase
         $response->assertViewHas('urls');
     }
 
-    // public function testStore()
-    // {
-    //     $url = route('urls.index');
+    public function testStore()
+    {
+        $url = route('urls.index');
 
-    //     $urlData = Urls::factory()->create();
+        $urlData = Urls::factory()->create();
 
-    //     $myRequest = new \Illuminate\Http\Request();
-    //     //$myRequest->merge(['url.name' => $urlData->attributesToArray()['name']]);
-    //     $myRequest->name = $urlData->attributesToArray()['name'];
+        $myRequest = new \Illuminate\Http\Request();
+        //$myRequest->merge(['url.name' => $urlData->attributesToArray()['name']]);
+        $myRequest->name = $urlData->attributesToArray()['name'];
 
-    //     // echo "\n--------------------This is all input data----------------------\n";
-    //     // print_r($request->all());
+        // echo "\n--------------------This is all input data----------------------\n";
+        // print_r($request->all());
 
-    //     // echo "\n--------------------This is whole model----------------------\n";
-    //     // print_r($urlData);
-    //     // echo "\n----------------------This is ID---------------------\n";
-    //     // print_r($urlData->getKey());
-    //     // echo "\n----------------------This is attributes---------------------\n";
-    //     // print_r($urlData->attributesToArray());
-    //     // echo "\n----------------------This is name---------------------\n";
-    //     // print_r($urlData->attributesToArray()['name']);
+        // echo "\n--------------------This is whole model----------------------\n";
+        // print_r($urlData);
+        // echo "\n----------------------This is ID---------------------\n";
+        // print_r($urlData->getKey());
+        // echo "\n----------------------This is attributes---------------------\n";
+        // print_r($urlData->attributesToArray());
+        // echo "\n----------------------This is name---------------------\n";
+        // print_r($urlData->attributesToArray()['name']);
         
-    //     $response = $this->post(route('urls.store'));
+        $response = $this->post(route('urls.store'));
 
-    //     //$response = $this->get(route('redirectTest'));
-    //     //$this->assertEquals(302, $response->getStatusCode());
+        //$response = $this->get(route('redirectTest'));
+        //$this->assertEquals(302, $response->getStatusCode());
 
-    //     $response->assertRedirect(route('urls.index'));
-    // }
+        $response->assertRedirect(route('urls.index'));
+    }
 
     public function testShow()
     {

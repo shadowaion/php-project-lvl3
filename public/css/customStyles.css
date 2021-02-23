@@ -41,6 +41,11 @@ ul li.list-group-item {
   border-color: black;
 }
 
+.menu-dark-background {
+  background-color: #343A40;
+  color: gainsboro;
+}
+
 .border-color-red {
   border: 2px red solid;
 }
