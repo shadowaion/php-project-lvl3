@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class UrlsTest extends TestCase
 {
-    use RefreshDatabase;
+    //use RefreshDatabase;
     /**
      * A basic feature test example.
      *
@@ -23,48 +23,35 @@ class UrlsTest extends TestCase
     //     $response->assertStatus(200);
     // }
 
-    // public function testIndex()
-    // {
-    //     $response = $this->call('GET', 'urls');
+    public function testIndex()
+    {
+        $response = $this->get(route('urls.index'));
 
-    //     $response->assertViewHas('urls');
-    // }
+        $response->assertStatus(200)->assertViewHas('urls');
+    }
 
     public function testStore()
     {
         $url = route('urls.index');
-
-        $urlData = Urls::factory()->create();
-
-        $myRequest = new \Illuminate\Http\Request();
-        //$myRequest->merge(['url.name' => $urlData->attributesToArray()['name']]);
-        $name1 = 'https://ru.hexlet.io/blog/posts/how-to-test-code';
-
-        // echo "\n--------------------This is all input data----------------------\n";
-        // print_r($request->all());
-
-        // echo "\n--------------------This is whole model----------------------\n";
-        // print_r($urlData);
-        // echo "\n----------------------This is ID---------------------\n";
-        // print_r($urlData->getKey());
-        // echo "\n----------------------This is attributes---------------------\n";
-        // print_r($urlData->attributesToArray());
-        // echo "\n----------------------This is name---------------------\n";
-        // print_r($urlData->attributesToArray()['name']);
-        
+        $name1 = 'https://example.org/blog/posts/how-to-test-code';
         $response = $this->post(route('urls.store'), ['url' => ['name' => $name1]]);
-
-        //$response = $this->get(route('redirectTest'));
-        //$this->assertEquals(302, $response->getStatusCode());
-
         $response->assertRedirect(route('urls.index'));
     }
 
-    // public function testShow()
-    // {
-    //     $urlData = Urls::factory()->create();
-    //     $response = $this->call('GET', route('urls.show', ['id' => $urlData->id]));
+    public function testShow()
+    {
+        $urlData = Urls::factory()->create();
+        // $urlCheckData = UrlCheck::factory()->create([
+        //     'url_id' => $urlData->id
+        // ]);
+        $response = $this->call('GET', route('urls.show', ['id' => $urlData->id]));
 
-    //     $response->assertViewHas('urls');
-    // }
+        $response->assertViewHas('urls');
+    }
+    public function testCheck()
+    {
+        $urlData = Urls::factory()->create();
+        $response = $this->post(route('urls.check', ['id' => $urlData->id]));
+        $response->assertRedirect(route('urls.show', ['id' => $urlData->id]));
+    }
 }

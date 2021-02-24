@@ -48,11 +48,6 @@ class UrlController extends Controller
     {
         $parsedUrl = parse_url($request->input('url.name'));
 
-        // echo "\n--------------------Inside controller----------------------\n";
-        // print_r($request->input('url.name'));
-        // echo "\n--------------------Inside controller----------------------\n";
-        // print_r($request->name);
-
         $normalizedScheme = mb_strtolower($parsedUrl["scheme"]);
         $normalizedHost = mb_strtolower($parsedUrl["host"]);
         $normalizedUrlName = "{$normalizedScheme}://{$normalizedHost}";
@@ -63,7 +58,7 @@ class UrlController extends Controller
             ->where('name', '=', $normalizedUrlName)
             ->upsert([
                 ['name' => $normalizedUrlName,
-                'updated_at' => $createdUpdatedAt, 
+                'updated_at' => $createdUpdatedAt,
                 'created_at' => $createdUpdatedAt],
             ], ['name'], ['updated_at']);
 
@@ -72,7 +67,6 @@ class UrlController extends Controller
             $errorMessage = "Error: {$e->getMessage()}";
             flash($errorMessage)->error();
         }
-
         return Redirect()->route('urls.index');//
     }
 
