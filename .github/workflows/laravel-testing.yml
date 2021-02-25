@@ -1,4 +1,4 @@
-name: PHP CodeCoverage from CodeClimate
+name: Laravel testing with PostgreSQL
 on:
     - push
 jobs:
