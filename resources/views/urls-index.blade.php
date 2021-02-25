@@ -33,8 +33,9 @@
                     <thead>
                         <tr>
                             <th class="col-lg-1" scope="col">ID</th>
-                            <th class="col-lg-8" scope="col">Name</th>
-                            <th class="col-lg-3" scope="col">Last check date</th>
+                            <th class="col-lg-5" scope="col">Name</th>
+                            <th class="col-lg-2" scope="col">Last check date</th>
+                            <th class="col-lg-1" scope="col">Status code</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,6 +46,7 @@
                                 <a href="{{route('urls.show', ['id' => $url->id])}}">{{$url->name}}</a>
                             </td>
                             <td>{{$url->last_check_date}}</td>
+                            <td>{{$url->status}}</td>
                         </tr>
                     @endforeach
                     </tbody>

@@ -85,10 +85,10 @@
                     @foreach($urlChecks as $urlCheck)
                         <tr>
                             <th scope="row">{{$urlCheck->id}}</th>
-                            <td>{{$urlCheck->status_code}}</td>
-                            <td>{{$urlCheck->h1}}</td>
-                            <td>{{$urlCheck->keyword}}</td>
-                            <td>{{$urlCheck->description}}</td>
+                            <td>{{$urlCheck->status_code ?? ''}}</td>
+                            <td>{{$urlCheck->h1  ?? ''}}</td>
+                            <td>{{$urlCheck->keyword  ?? ''}}</td>
+                            <td>{{$urlCheck->description  ?? ''}}</td>
                             <td>{{$urlCheck->created_at}}</td>
                         </tr>
                     @endforeach

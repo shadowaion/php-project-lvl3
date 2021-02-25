@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
 
 class UrlController extends Controller
@@ -18,7 +19,8 @@ class UrlController extends Controller
     {
         $urls = DB::table('urls')
             ->leftJoin('url_checks', 'urls.id', '=', 'url_checks.url_id')
-            ->select(DB::raw('DISTINCT ON (urls.name) urls.*, url_checks.created_at as last_check_date'))
+            ->select(DB::raw('DISTINCT ON (urls.name) urls.*, 
+            url_checks.created_at as last_check_date, url_checks.status_code as status'))
             ->orderby('urls.name')
             ->orderby('urls.id')
             ->orderby('url_checks.created_at', 'desc')
@@ -141,11 +143,15 @@ class UrlController extends Controller
                 ->where('id', '=', $id)
                 ->orderby('name')
                 ->get();
+        
+        $response = Http::get($urls[0]->name);
+        $respStatusCode = $response->getStatusCode();
 
         try {
             DB::table('url_checks')
             ->upsert([
                 ['url_id' => $id,
+                'status_code' => $respStatusCode,
                 'updated_at' => $createdUpdatedAt, 
                 'created_at' => $createdUpdatedAt],
             ], ['id'], ['updated_at']);
