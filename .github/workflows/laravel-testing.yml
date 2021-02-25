@@ -4,6 +4,7 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
+        container: node:10.18-jessie
         services:
             postgres:
                 image: postgres
@@ -29,6 +30,9 @@ jobs:
                     tools: phpunit
             -   name: Composer (php-actions)
                 uses: php-actions/composer@v5
+            -   name: Composer update
+                run: |
+                    composer self-update
             -   name: Install composer dependencies
                 run: composer install --no-scripts
             -   name: Cache dependencies
