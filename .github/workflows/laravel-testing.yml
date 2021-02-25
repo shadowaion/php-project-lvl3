@@ -18,7 +18,7 @@ jobs:
         steps:
             -   uses: actions/checkout@v2
             -   name: Setup PHP with pgsql
-                uses: shivammathur/setup-php@v2
+                uses: shivammathur/setup-php@2.10.0
                 with:
                     php-version: '7.4'
                     extensions: curl, pgsql, pdo_pgsql
