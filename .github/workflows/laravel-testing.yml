@@ -4,6 +4,16 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
+        services:
+            postgres:
+                image: postgres
+                env:
+                    POSTGRES_USER: postgres
+                    POSTGRES_PASSWORD: postgres
+                    POSTGRES_DB: test-php-lvl3
+                ports:
+                -   5432:5432
+                options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
         steps:
             -   uses: actions/checkout@v2
             -   run: |
@@ -17,19 +27,18 @@ jobs:
                     php-version: '7.4'
                     extensions: curl, pgsql, pdo_pgsql
                     tools: phpunit
+            -   name: Composer (php-actions)
+                uses: php-actions/composer@v5
+            -   name: Install composer dependencies
+                run: composer install --no-scripts
             -   name: Cache dependencies
                 uses: actions/cache@v1
                 with:
                     path: ~/.composer/cache/files
                     key: dependencies-composer-${{ hashFiles('composer.json') }}
-            -   name: Composer (php-actions)
-                uses: php-actions/composer@v5
             -   name: Install front-end dependencies
                 run: |
                   npm install
                   npm run dev
-            -   name: Install composer dependencies
-                run: |
-                    composer install --no-scripts
             -   name: Run Testsuits
                 run: $GITHUB_WORKSPACE/vendor/bin/phpunit tests/Feature --verbose
