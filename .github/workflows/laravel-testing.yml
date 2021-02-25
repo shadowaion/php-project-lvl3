@@ -43,5 +43,7 @@ jobs:
                 run: |
                   npm install
                   npm run dev
+            -   name: Database set up migrations
+                run: php artisan migrate
             -   name: Run Testsuits
                 run: $GITHUB_WORKSPACE/vendor/bin/phpunit tests/Feature --verbose
