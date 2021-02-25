@@ -33,7 +33,7 @@ jobs:
                 run: |
                     composer self-update
             -   name: Install composer dependencies
-                run: composer install --no-scripts
+                run: sudo composer install --no-scripts
             -   name: Cache dependencies
                 uses: actions/cache@v1
                 with:
