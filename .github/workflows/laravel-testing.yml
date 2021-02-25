@@ -17,18 +17,17 @@ jobs:
                 options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
         steps:
             -   uses: actions/checkout@v2
-            -   name: Cache dependencies
-                uses: actions/cache@v1
-                with:
-                    path: ~/.composer/cache/files
-                    key: dependencies-composer-${{ hashFiles('composer.json') }}
-            -   name: Setup PHP with xdebug
+            -   name: Setup PHP with pgsql
                 uses: shivammathur/setup-php@v2
                 with:
                     php-version: '7.4'
                     extensions: curl, pgsql, pdo_pgsql
                     tools: phpunit
-                    coverage: xdebug
+            -   name: Cache dependencies
+                uses: actions/cache@v1
+                with:
+                    path: ~/.composer/cache/files
+                    key: dependencies-composer-${{ hashFiles('composer.json') }}
             -   name: Composer (php-actions)
                 uses: php-actions/composer@v5
             -   name: Install front-end dependencies
