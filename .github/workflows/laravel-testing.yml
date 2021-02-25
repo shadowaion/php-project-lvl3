@@ -4,19 +4,13 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
-        container: node:10.18-jessie
-        services:
-            postgres:
-                image: postgres
-                env:
-                    POSTGRES_USER: postgres
-                    POSTGRES_PASSWORD: postgres
-                    POSTGRES_DB: test-php-lvl3
-                ports:
-                -   5432:5432
-                options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
         steps:
             -   uses: actions/checkout@v2
+            -   run: |
+                    source /etc/lsb-release
+                    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1CE2AFD36DBCCA00
+                    sudo echo "deb https://repos.loraserver.io/${DISTRIB_ID,,} ${DISTRIB_CODENAME} testing" | sudo tee /etc/apt/sources.list.d/loraserver.list
+                    sudo apt-get update 
             -   name: Setup PHP with pgsql
                 uses: shivammathur/setup-php@2.10.0
                 with:
