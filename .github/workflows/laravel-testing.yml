@@ -48,7 +48,5 @@ jobs:
                     psql -c 'CREATE DATABASE IF NOT EXISTS test-php-lvl3;'
                     psql -c 'CREATE TABLE urls ( id bigint NOT NULL DEFAULT nextval('urls_id_seq'::regclass), name character varying(255) COLLATE pg_catalog."default" NOT NULL, created_at timestamp(0) without time zone, updated_at timestamp(0) without time zone, CONSTRAINT urls_pkey PRIMARY KEY (id), CONSTRAINT urls_name_unique UNIQUE (name) );'
                     psql -c 'CREATE TABLE url_checks ( id bigint NOT NULL DEFAULT nextval('url_checks_id_seq'::regclass), url_id bigint NOT NULL, status_code integer, h1 character varying(255) COLLATE pg_catalog."default", keywords character varying(255) COLLATE pg_catalog."default", description character varying(255) COLLATE pg_catalog."default", created_at timestamp(0) without time zone, updated_at timestamp(0) without time zone, CONSTRAINT url_checks_pkey PRIMARY KEY (id), CONSTRAINT url_checks_url_id_foreign FOREIGN KEY (url_id) REFERENCES urls (id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION);'
-                    psql -c 'INSERT INTO urls(id, name, created_at, updated_at) VALUES (1, 'https://example.org', '2021-02-26 02:00:00', '2021-02-26 02:00:00');'
-                    psql -c 'INSERT INTO url_checks(id, url_id, status_code, h1, keywords, description, created_at, updated_at) VALUES (1, 1, 200, 'text', 'text', 'text', '2021-02-26 02:00:00', '2021-02-26 02:00:00');'
             -   name: Run Testsuits
                 run: $GITHUB_WORKSPACE/vendor/bin/phpunit tests/Feature --verbose

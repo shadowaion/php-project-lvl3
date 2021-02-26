@@ -86,7 +86,7 @@ class UrlController extends Controller
             ->where('id', '=', $id)
             ->orderby('name')
             ->get();
-        
+
         $urlChecks = DB::table('url_checks')
             ->select(DB::raw('*'))
             ->where('url_id', '=', $id)
@@ -148,7 +148,7 @@ class UrlController extends Controller
                 ->where('id', '=', $id)
                 ->orderby('name')
                 ->get();
-        
+
         $response = Http::get($urls[0]->name);
         $respStatusCode = $response->getStatusCode();
 
@@ -177,7 +177,7 @@ class UrlController extends Controller
                 'h1' => $h1Text,
                 'keywords' => $keywordsContent,
                 'description' => $descriptionContent,
-                'updated_at' => $createdUpdatedAt, 
+                'updated_at' => $createdUpdatedAt,
                 'created_at' => $createdUpdatedAt],
             ], ['id'], ['updated_at']);
 
@@ -186,7 +186,7 @@ class UrlController extends Controller
             $errorMessage = "Error: {$e->getMessage()}";
             flash($errorMessage)->error();
         }
-    
+
         return Redirect()->route('urls.show', ['id' => $id]);//
     }
 }
