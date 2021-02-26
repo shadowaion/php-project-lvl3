@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Http;
+use DiDom\Document;
 use Carbon\Carbon;
 
 class UrlController extends Controller
@@ -162,6 +163,34 @@ class UrlController extends Controller
             flash($errorMessage)->error();
         }
     
-        return Redirect()->route('urls.show', ['id' => $id]);//
+        return view('main');//Redirect()->route('urls.show', ['id' => $id]);//
+    }
+    /**
+     * Check the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function didom()
+    {
+        $name = "https://example.com/";
+
+        $response = Http::get($name);
+        $respStatusCode = $response->getStatusCode();
+
+        echo "\n----------------------------------------------------\n";
+        print_r($respStatusCode);
+
+        $document = new Document();
+        $document->loadHtmlFile($name);
+
+        $keywords = $document->find('meta[name=keywords]');
+        $description = $document->find('meta[name=keywords]');
+
+        echo "\n----------------------------------------------------\n";
+        print_r($keywords->html());
+        echo "\n----------------------------------------------------\n";
+        print_r($description->html());
+
+        return 
     }
 }
