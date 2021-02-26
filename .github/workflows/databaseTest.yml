@@ -1,4 +1,4 @@
-name: Laravel testing with PostgreSQL
+name: PostgreSQL database
 on:
     - push
 jobs:
