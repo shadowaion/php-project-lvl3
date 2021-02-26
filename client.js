@@ -19,7 +19,7 @@ pgclient.query(table1, (err, res) => {
     if (err) throw err
 });
 
-pgclient.query(table2, values, (err, res) => {
+pgclient.query(table2, (err, res) => {
     if (err) throw err
 });
 
