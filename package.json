@@ -11,6 +11,9 @@
         "production": "mix --production",
         "postinstall": "npm run prod"
     },
+    "dependencies": {
+        "pg": "*"
+    },
     "devDependencies": {
         "axios": "^0.21",
         "bootstrap": "^4.0.0",
