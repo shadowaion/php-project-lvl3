@@ -23,9 +23,9 @@ pgclient.query(table2, (err, res) => {
     if (err) throw err
 });
 
-pgclient.query(text, values, (err, res) => {
-    if (err) throw err
-});
+// pgclient.query(text, values, (err, res) => {
+//     if (err) throw err
+// });
 
 pgclient.query('SELECT * FROM urls', (err, res) => {
     if (err) throw err
