@@ -16,6 +16,10 @@ jobs:
                 options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
         steps:
             -   uses: actions/checkout@v2
+            -   name: Install front-end dependencies
+                run: |
+                  npm install
+                  npm run dev
             -   run: |
                     source /etc/lsb-release
                     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1CE2AFD36DBCCA00
@@ -52,10 +56,6 @@ jobs:
                 with:
                     path: ~/.composer/cache/files
                     key: dependencies-composer-${{ hashFiles('composer.json') }}
-            -   name: Install front-end dependencies
-                run: |
-                  npm install
-                  npm run dev
             -   name: Database set up migrations
                 run: |
                     psql -c 'CREATE DATABASE IF NOT EXISTS test-php-lvl3;'
