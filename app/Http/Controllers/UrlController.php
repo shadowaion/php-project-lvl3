@@ -137,6 +137,10 @@ class UrlController extends Controller
      */
     public function check($id)
     {
+        $h1Text = '';
+        $keywordsContent = '';
+        $descriptionContent = '';
+
         $createdUpdatedAt = Carbon::now()->toDateTimeString();
 
         $urls = DB::table('urls')
@@ -148,11 +152,31 @@ class UrlController extends Controller
         $response = Http::get($urls[0]->name);
         $respStatusCode = $response->getStatusCode();
 
+        $document = new Document();
+        $document->loadHtmlFile($urls[0]->name);
+
+        $h1 = $document->find('h1');
+        $keywords = $document->find('meta[name=keywords]');
+        $description = $document->find('meta[name=description]');
+
+        if (count($h1) > 0) {
+            $h1Text = $h1[0]->innerHtml();
+        }
+        if (count($keywords) > 0) {
+            $keywordsContent = $keywords[0]->getAttribute('content');
+        }
+        if (count($description) > 0) {
+            $descriptionContent = $description[0]->getAttribute('content');
+        }
+
         try {
             DB::table('url_checks')
             ->upsert([
                 ['url_id' => $id,
                 'status_code' => $respStatusCode,
+                'h1' => $h1Text,
+                'keywords' => $keywordsContent,
+                'description' => $descriptionContent,
                 'updated_at' => $createdUpdatedAt, 
                 'created_at' => $createdUpdatedAt],
             ], ['id'], ['updated_at']);
@@ -163,7 +187,7 @@ class UrlController extends Controller
             flash($errorMessage)->error();
         }
     
-        return view('main');//Redirect()->route('urls.show', ['id' => $id]);//
+        return Redirect()->route('urls.show', ['id' => $id]);//
     }
     /**
      * Check the specified resource.
@@ -172,25 +196,42 @@ class UrlController extends Controller
      */
     public function didom()
     {
-        $name = "https://example.com/";
+        $name = "https://www.notion.so/";
+        $name1 = "http://joyreactor.cc/";
 
         $response = Http::get($name);
         $respStatusCode = $response->getStatusCode();
 
-        echo "\n----------------------------------------------------\n";
+        echo "\n------------------------respStatusCode----------------------------\n";
         print_r($respStatusCode);
 
         $document = new Document();
         $document->loadHtmlFile($name);
 
+        $h1 = $document->find('h1');
         $keywords = $document->find('meta[name=keywords]');
-        $description = $document->find('meta[name=keywords]');
+        $description = $document->find('meta[name=description]');
 
-        echo "\n----------------------------------------------------\n";
-        print_r($keywords->html());
-        echo "\n----------------------------------------------------\n";
-        print_r($description->html());
+        // if (isset($keywords)) {
 
-        return 
+        // }
+        // if (isset($description)) {
+            
+        // }
+        echo "\n|||---------------------h1----------------------------|||\n";
+        var_dump(optional($h1));
+        echo "\n|||---------------------keywords----------------------------|||\n";
+        var_dump(optional($keywords));
+        echo "\n|||-----------------------description-----------------------------|||\n";
+        var_dump(optional($description));
+
+        echo "\n|||--------------------------description[0]--------------------------|||\n";
+        var_dump($description[0]->getAttribute('content'));
+        echo "\n|||---------------------h1----------------------------|||\n";
+        var_dump($h1[0]->innerHtml());
+        echo "\n|||-------------------------keywords[0]---------------------------|||\n";
+        var_dump($keywords[0]->getAttribute('content'));
+
+        return view('main');
     }
 }
