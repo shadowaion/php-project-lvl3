@@ -19,17 +19,17 @@
         </style>
     </head>
     <body class="antialiased">
-    <div class="container-fluid border-color-black">
-        <div class="row justify-content-left border-color-yellow menu-dark-background">
+    <div class="container-fluid">
+        <div class="row justify-content-left menu-dark-background">
             <div class="col-lg-1 text-center button-fonts"><a href="{{route('mainPage')}}">Main</a></div>
             <div class="col-lg-1 text-center button-fonts"><a href="{{route('urls.index')}}">Websites</a></div>
         </div>
-        <div class="row justify-content-center border-color-blueviolet main-container">
-            <div class="col-lg-8 border-color-red">
+        <div class="row justify-content-center main-container">
+            <div class="col-lg-8">
                 @include('flash::message')
             </div>
         </div>
-        <div class="row justify-content-center border-color-purple">
+        <div class="row justify-content-center">
             <div class="col-lg-8">
                 <table class="table table-bordered black-border">
                   <tbody>
@@ -53,7 +53,7 @@
                 </table>
             </div>
         </div>
-        <div class="row justify-content-center border-color-yellow mt-5">
+        <div class="row justify-content-center mt-5">
             <div class="col-lg-8 d-lg-flex justify-content-between">
                 <div class="col-lg-2 p-0 button-fonts">
                     Checks:
@@ -67,7 +67,7 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center border-color-blue">
+        <div class="row justify-content-center">
         @if (isset($urlChecks))
             <div class="col-lg-8 mt-4">
                 <table class="table table-bordered black-border">

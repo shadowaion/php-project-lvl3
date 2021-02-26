@@ -19,13 +19,13 @@
         </style>
     </head>
     <body class="antialiased">
-    <div class="container-fluid border-color-black">
-        <div class="row justify-content-left border-color-yellow menu-dark-background">
+    <div class="container-fluid ">
+        <div class="row justify-content-left menu-dark-background">
             <div class="col-lg-1 text-center button-fonts"><a href="{{route('mainPage')}}">Main</a></div>
             <div class="col-lg-1 text-center button-fonts"><a href="{{route('urls.index')}}">Websites</a></div>
         </div>
-        <div class="row justify-content-center border-color-yellow main-container">
-            <div class="col-lg-7 border-color-red">
+        <div class="row justify-content-center main-container">
+            <div class="col-lg-7 ">
                 <form action="{{route('urls.store')}}" method="post">
                     @csrf <!-- {{ csrf_field() }} -->
                     <input class="url-input-text" required type="text" name="url[name]" placeholder="Type the URL">

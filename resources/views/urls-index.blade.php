@@ -19,16 +19,16 @@
         </style>
     </head>
     <body class="antialiased">
-    <div class="container-fluid border-color-black">
-        <div class="row justify-content-left border-color-yellow menu-dark-background">
+    <div class="container-fluid">
+        <div class="row justify-content-left menu-dark-background">
             <div class="col-lg-1 text-center button-fonts"><a href="{{route('mainPage')}}">Main</a></div>
             <div class="col-lg-1 text-center button-fonts"><a href="{{route('urls.index')}}">Websites</a></div>
         </div>
-        <div class="row justify-content-center border-color-yellow main-container">
-            <div class="col-lg-8 border-color-red">
+        <div class="row justify-content-center main-container">
+            <div class="col-lg-8">
                 @include('flash::message')
             </div>
-            <div class="col-lg-8 border-color-red">
+            <div class="col-lg-8">
                 <table class="table table-bordered black-border">
                     <thead>
                         <tr>

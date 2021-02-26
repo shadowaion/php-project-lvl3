@@ -18,12 +18,6 @@ Route::get('/', function () {
     return view('main');
 })->name('mainPage');
 
-Route::get('/testRedirect', function () {
-    return Redirect()->route('urls.index');
-})->name('redirectTest');
-
-Route::get('/didom', [UrlController::class, 'didom'])->name('urls.didom');
-
 Route::get('/urls', [UrlController::class, 'index'])->name('urls.index');
 
 Route::post('/urls', [UrlController::class, 'store'])->name('urls.store');

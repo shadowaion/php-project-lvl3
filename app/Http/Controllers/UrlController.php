@@ -189,49 +189,4 @@ class UrlController extends Controller
     
         return Redirect()->route('urls.show', ['id' => $id]);//
     }
-    /**
-     * Check the specified resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function didom()
-    {
-        $name = "https://www.notion.so/";
-        $name1 = "http://joyreactor.cc/";
-
-        $response = Http::get($name);
-        $respStatusCode = $response->getStatusCode();
-
-        echo "\n------------------------respStatusCode----------------------------\n";
-        print_r($respStatusCode);
-
-        $document = new Document();
-        $document->loadHtmlFile($name);
-
-        $h1 = $document->find('h1');
-        $keywords = $document->find('meta[name=keywords]');
-        $description = $document->find('meta[name=description]');
-
-        // if (isset($keywords)) {
-
-        // }
-        // if (isset($description)) {
-            
-        // }
-        echo "\n|||---------------------h1----------------------------|||\n";
-        var_dump(optional($h1));
-        echo "\n|||---------------------keywords----------------------------|||\n";
-        var_dump(optional($keywords));
-        echo "\n|||-----------------------description-----------------------------|||\n";
-        var_dump(optional($description));
-
-        echo "\n|||--------------------------description[0]--------------------------|||\n";
-        var_dump($description[0]->getAttribute('content'));
-        echo "\n|||---------------------h1----------------------------|||\n";
-        var_dump($h1[0]->innerHtml());
-        echo "\n|||-------------------------keywords[0]---------------------------|||\n";
-        var_dump($keywords[0]->getAttribute('content'));
-
-        return view('main');
-    }
 }
