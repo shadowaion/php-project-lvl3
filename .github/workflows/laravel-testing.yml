@@ -19,10 +19,6 @@ jobs:
             -   uses: actions/setup-node@v2
                 with:
                     node-version: '14'
-            -   name: Prepare Laravel Application
-                run: |
-                    cp -f .env.ci .env
-                    php artisan key:generate
             -   name: Install front-end dependencies
                 run: |
                   npm install
@@ -40,6 +36,10 @@ jobs:
                     tools: phpunit
             -   name: Composer (php-actions)
                 uses: php-actions/composer@v5
+            -   name: Prepare Laravel Application
+                run: |
+                    cp -f .env.ci .env
+                    php artisan key:generate
             -   name: NPM ci
                 run: npm ci
             -   name: Connect to PostgreSQL
