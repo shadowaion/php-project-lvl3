@@ -39,7 +39,7 @@ jobs:
             -   name: Prepare Laravel Application
                 run: |
                     cp -f .env.ci .env
-                    php artisan key:generate
+                    cp -f .env .env.testing
             -   name: NPM ci
                 run: npm ci
             -   name: Connect to PostgreSQL
