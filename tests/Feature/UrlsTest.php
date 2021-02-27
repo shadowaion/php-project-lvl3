@@ -28,7 +28,18 @@ class UrlsTest extends TestCase
     public function testIndex()
     {
         $response = $this->get(route('urls.index'));
+
         echo "\n------------------TestIndex-------------------\n";
+        echo "\n------------------Response-------------------\n";
+        var_dump($response);
+
+        echo "\n------------------DB query-------------------\n";
+        $urls = DB::table('urls')
+                ->select(DB::raw('*'))
+                ->orderby('name')
+                ->get();
+        echo "\n------------------urls var_dump-------------------\n";
+        var_dump($urls);
 
         $response->assertStatus(200)->assertViewHas('urls');
     }
