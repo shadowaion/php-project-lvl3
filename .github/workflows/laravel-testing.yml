@@ -59,6 +59,10 @@ jobs:
                 with:
                     path: ~/.composer/cache/files
                     key: dependencies-composer-${{ hashFiles('composer.json') }}
+            -   name: Prepare Laravel Application
+                run: |
+                    cp .env.ci .env
+                    php artisan key:generate
             -   name: Code Climate Coverage and running Testsuits
                 env:
                     CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
