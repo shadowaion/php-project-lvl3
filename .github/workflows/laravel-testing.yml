@@ -23,11 +23,6 @@ jobs:
                 run: |
                   npm install
                   npm run dev
-            -   run: |
-                    source /etc/lsb-release
-                    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1CE2AFD36DBCCA00
-                    sudo echo "deb https://repos.loraserver.io/${DISTRIB_ID,,} ${DISTRIB_CODENAME} testing" | sudo tee /etc/apt/sources.list.d/loraserver.list
-                    sudo apt-get update 
             -   name: Setup PHP with pgsql
                 uses: shivammathur/setup-php@2.10.0
                 with:
