@@ -38,7 +38,6 @@ jobs:
                 uses: php-actions/composer@v5
             -   name: Prepare Laravel Application
                 run: |
-                    cp -f .env .env
                     php artisan key:generate
             -   name: NPM ci
                 run: npm ci
