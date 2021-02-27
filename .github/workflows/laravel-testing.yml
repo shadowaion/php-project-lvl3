@@ -36,10 +36,6 @@ jobs:
                     tools: phpunit
             -   name: Composer (php-actions)
                 uses: php-actions/composer@v5
-            -   name: Installation of node
-                uses: actions/setup-node@v2
-                with:
-                    node-version: '14'
             -   name: NPM ci
                 run: npm ci
             -   name: Connect to PostgreSQL
