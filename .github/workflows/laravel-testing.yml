@@ -19,6 +19,10 @@ jobs:
             -   uses: actions/setup-node@v2
                 with:
                     node-version: '14'
+            -   name: Prepare Laravel Application
+                run: |
+                    cp -f .env.ci .env
+                    php artisan key:generate
             -   name: Install front-end dependencies
                 run: |
                   npm install
@@ -38,10 +42,6 @@ jobs:
                 uses: php-actions/composer@v5
             -   name: NPM ci
                 run: npm ci
-            -   name: Prepare Laravel Application
-                run: |
-                    cp .env.ci .env
-                    php artisan key:generate
             -   name: Connect to PostgreSQL
                 # Runs a script that creates a PostgreSQL client, populates
                 # the client with data, and retrieves data
