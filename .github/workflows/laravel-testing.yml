@@ -36,7 +36,11 @@ jobs:
                     tools: phpunit
             -   name: Composer (php-actions)
                 uses: php-actions/composer@v5
-            -   name: Install dependencies
+            -   name: Installation of node
+                uses: actions/setup-node@v2
+                with:
+                    node-version: '14'
+            -   name: NPM ci
                 run: npm ci
             -   name: Connect to PostgreSQL
                 # Runs a script that creates a PostgreSQL client, populates
@@ -59,10 +63,13 @@ jobs:
                 with:
                     path: ~/.composer/cache/files
                     key: dependencies-composer-${{ hashFiles('composer.json') }}
-            -   name: Database set up migrations
+            -   name: Code Climate Coverage and running Testsuits
+                env:
+                    CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
                 run: |
-                    psql -c 'CREATE DATABASE IF NOT EXISTS test-php-lvl3;'
-                    psql -c 'CREATE TABLE urls ( id bigint NOT NULL DEFAULT nextval('urls_id_seq'::regclass), name character varying(255) COLLATE pg_catalog."default" NOT NULL, created_at timestamp(0) without time zone, updated_at timestamp(0) without time zone, CONSTRAINT urls_pkey PRIMARY KEY (id), CONSTRAINT urls_name_unique UNIQUE (name) );'
-                    psql -c 'CREATE TABLE url_checks ( id bigint NOT NULL DEFAULT nextval('url_checks_id_seq'::regclass), url_id bigint NOT NULL, status_code integer, h1 character varying(255) COLLATE pg_catalog."default", keywords character varying(255) COLLATE pg_catalog."default", description character varying(255) COLLATE pg_catalog."default", created_at timestamp(0) without time zone, updated_at timestamp(0) without time zone, CONSTRAINT url_checks_pkey PRIMARY KEY (id), CONSTRAINT url_checks_url_id_foreign FOREIGN KEY (url_id) REFERENCES urls (id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION);'
-            -   name: Run Testsuits
+                     curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+                     chmod +x ./cc-test-reporter
+                     ./cc-test-reporter before-build
+                     $GITHUB_WORKSPACE/vendor/bin/phpunit tests/Feature
+            -   name: Run Testsuits without Code Coverage
                 run: $GITHUB_WORKSPACE/vendor/bin/phpunit tests/Feature --verbose
