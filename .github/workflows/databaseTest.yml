@@ -33,4 +33,4 @@ jobs:
                     # The default PostgreSQL port
                     POSTGRES_PORT: 5432
             -   name: Run Testsuits
-                run: $GITHUB_WORKSPACE/vendor/bin/phpunit tests/Feature --verbose
+                run: vendor/bin/phpunit tests/Feature --verbose
