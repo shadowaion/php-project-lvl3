@@ -28,6 +28,7 @@ class UrlsTest extends TestCase
     public function testIndex()
     {
         $response = $this->get(route('urls.index'));
+        echo "\n------------------TestIndex-------------------\n";
 
         $response->assertStatus(200)->assertViewHas('urls');
     }
