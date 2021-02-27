@@ -2,18 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\Urls;
+use App\Models\Url;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Carbon\Carbon;
 
-class UrlsFactory extends Factory
+class UrlFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Urls::class;
+    protected $model = Url::class;
 
     /**
      * Define the model's default state.

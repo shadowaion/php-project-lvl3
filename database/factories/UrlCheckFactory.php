@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\UrlCheck;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Carbon\Carbon;
 
 class UrlCheckFactory extends Factory
 {

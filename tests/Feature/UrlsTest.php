@@ -7,7 +7,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
-use App\Models\Urls;
 use Carbon\Carbon;
 use Tests\TestCase;
 
@@ -29,17 +28,17 @@ class UrlsTest extends TestCase
     {
         $response = $this->get(route('urls.index'));
 
-        echo "\n------------------TestIndex-------------------\n";
-        echo "\n------------------Response-------------------\n";
-        //var_dump($response);
+        // echo "\n------------------TestIndex-------------------\n";
+        // echo "\n------------------Response-------------------\n";
+        // //var_dump($response);
 
-        echo "\n------------------DB query-------------------\n";
-        $urls = DB::table('urls')
-                ->select(DB::raw('*'))
-                ->orderby('name')
-                ->get();
-        echo "\n------------------urls var_dump-------------------\n";
-        var_dump($urls);
+        // echo "\n------------------DB query-------------------\n";
+        // $urls = DB::table('urls')
+        //         ->select(DB::raw('*'))
+        //         ->orderby('name')
+        //         ->get();
+        // echo "\n------------------urls var_dump-------------------\n";
+        // var_dump($urls);
 
         $response->assertStatus(200)->assertViewHas('urls');
     }
