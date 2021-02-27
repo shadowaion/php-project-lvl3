@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Urls;
+use App\Models\Url;
 use App\Models\UrlCheck;
 
 class DatabaseSeeder extends Seeder
@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Urls::factory()->create([
+        Url::factory()->create([
             'id' => 1,
             'name' => 'https://example.org'
         ]);
