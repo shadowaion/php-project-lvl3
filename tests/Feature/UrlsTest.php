@@ -31,7 +31,7 @@ class UrlsTest extends TestCase
 
         echo "\n------------------TestIndex-------------------\n";
         echo "\n------------------Response-------------------\n";
-        var_dump($response);
+        //var_dump($response);
 
         echo "\n------------------DB query-------------------\n";
         $urls = DB::table('urls')
