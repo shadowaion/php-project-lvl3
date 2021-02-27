@@ -19,10 +19,10 @@ class DatabaseSeeder extends Seeder
             'id' => 1,
             'name' => 'https://example.org'
         ]);
-        UrlCheckFactory::factory()->create([
+        UrlCheck::factory()->create([
             'url_id' => 1,
         ]);
-        UrlCheckFactory::factory()->create([
+        UrlCheck::factory()->create([
             'url_id' => 1,
         ]);
     }
