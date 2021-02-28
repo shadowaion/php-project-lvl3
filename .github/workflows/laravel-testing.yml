@@ -65,7 +65,7 @@ jobs:
                      curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
                      chmod +x ./cc-test-reporter
                      ./cc-test-reporter before-build
-                     $GITHUB_WORKSPACE/vendor/bin/phpunit tests/Feature
+                     $GITHUB_WORKSPACE/vendor/bin/phpunit tests/Feature --coverage-clover clover.yml
                      ./cc-test-reporter after-build
             -   name: Run Testsuits without Code Coverage
                 run: $GITHUB_WORKSPACE/vendor/bin/phpunit tests/Feature --verbose
