@@ -66,5 +66,6 @@ jobs:
                      chmod +x ./cc-test-reporter
                      ./cc-test-reporter before-build
                      $GITHUB_WORKSPACE/vendor/bin/phpunit tests/Feature
+                     ./cc-test-reporter after-build
             -   name: Run Testsuits without Code Coverage
                 run: $GITHUB_WORKSPACE/vendor/bin/phpunit tests/Feature --verbose
