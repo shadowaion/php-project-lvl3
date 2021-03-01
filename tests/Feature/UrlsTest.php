@@ -50,8 +50,8 @@ class UrlsTest extends TestCase
         $name2 = 'https://example.org/blogs';
         $response = $this->post(route('urls.store'), ['url' => ['name' => $name2]]);
         
-        echo "\n------------------Response store-------------------\n";
-        var_dump($response);
+        // echo "\n------------------Response store-------------------\n";
+        // var_dump($response);
         
         $response->assertRedirect(route('urls.index'));
     }
@@ -80,8 +80,8 @@ class UrlsTest extends TestCase
 
         $response1 = $this->post(route('urls.check', ['id' => $id]));
 
-        echo "\n------------------Response Check-------------------\n";
-        var_dump($response);
+        // echo "\n------------------Response Check-------------------\n";
+        // var_dump($response);
 
         $response1->assertRedirect(route('urls.show', ['id' => $id]));
     }
