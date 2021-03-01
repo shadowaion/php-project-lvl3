@@ -10,8 +10,6 @@ setup:
 	cp -n .env.example .env|| true
 	php artisan key:gen --ansi
 	touch database/database.sqlite
-	ls ./database -al
-	cat .env
 	php artisan migrate
 	php artisan db:seed
 
