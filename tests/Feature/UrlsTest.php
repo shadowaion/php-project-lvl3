@@ -47,7 +47,8 @@ class UrlsTest extends TestCase
     {
         $url = route('urls.index');
         $name1 = 'https://example.com/blog/posts/how-to-test-code';
-        $response = $this->post(route('urls.store'), ['url' => ['name' => $name1]]);
+        $name2 = 'https://example.org/blogs';
+        $response = $this->post(route('urls.store'), ['url' => ['name' => $name2]]);
         $response->assertRedirect(route('urls.index'));
     }
 
