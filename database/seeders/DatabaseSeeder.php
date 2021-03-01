@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         Url::factory()->create([
             'id' => 1,
-            'name' => 'https://example.org'
+            'name' => 'https://example.com'
         ]);
         UrlCheck::factory()->create([
             'url_id' => 1,

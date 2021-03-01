@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -12,6 +13,7 @@ use Tests\TestCase;
 
 class UrlsTest extends TestCase
 {
+    //use DatabaseMigrations;
     //use RefreshDatabase;
     /**
      * A basic feature test example.
@@ -20,9 +22,7 @@ class UrlsTest extends TestCase
      */
     // public function test_example()
     // {
-    //     $response = $this->get('/');
-
-    //     $response->assertStatus(200);
+    //     $this->seed();
     // }
     public function testIndex()
     {
@@ -53,6 +53,14 @@ class UrlsTest extends TestCase
 
     public function testShow()
     {
+        // echo "\n------------------DB query-------------------\n";
+        // $urls = DB::table('urls')
+        //         ->select(DB::raw('*'))
+        //         ->orderby('name')
+        //         ->get();
+        // echo "\n------------------urls var_dump-------------------\n";
+        // var_dump($urls);
+
         $id = 1;
 
         $response = $this->call('GET', route('urls.show', ['id' => $id]));

@@ -35,6 +35,7 @@ class UrlController extends Controller
             ->orderby('urls.id')
             ->orderByRaw('MAX(url_checks.created_at) DESC')
             ->get();
+        //echo "\n------------------urlsCont var_dump-------------------\n";
         //var_dump($urls);
         return view('urls-index', ['urls' => $urls]);//
     }
@@ -91,17 +92,22 @@ class UrlController extends Controller
     public function show($id)
     {
         $urls = DB::table('urls')
-            ->select(DB::raw('*'))
+            //->select(DB::raw('*'))
             ->where('id', '=', $id)
             ->orderby('name')
             ->get();
 
         $urlChecks = DB::table('url_checks')
-            ->select(DB::raw('*'))
+            //->select(DB::raw('*'))
             ->where('url_id', '=', $id)
             ->orderby('created_at', 'desc')
             ->get();
-        //var_dump($urls);
+        
+        // echo "\n-----------urls------------\n";
+        // var_dump($urls);
+        // echo "\n-----------urlChecks------------\n";
+        // var_dump($urlChecks);
+        
         return view('urls-show', ['urls' => $urls, 'urlChecks' => $urlChecks]);//
     }
 
