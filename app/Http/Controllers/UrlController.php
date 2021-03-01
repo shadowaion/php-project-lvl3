@@ -20,12 +20,11 @@ class UrlController extends Controller
     {
         $urls = DB::table('urls')
             ->leftJoin('url_checks', 'urls.id', '=', 'url_checks.url_id')
-            ->select(DB::raw('urls.*, url_checks.created_at as last_check_date, 
-            url_checks.status_code as status'))
+            ->select(DB::raw('urls.*, 
+            url_checks.created_at as last_check_date, url_checks.status_code as status'))
             ->orderby('urls.name')
             ->orderby('urls.id')
             ->orderby('url_checks.created_at', 'desc')
-            ->groupBy('urls.name')
             ->get();
         //var_dump($urls);
         return view('urls-index', ['urls' => $urls]);//
