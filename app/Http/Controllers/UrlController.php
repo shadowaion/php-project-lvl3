@@ -20,7 +20,7 @@ class UrlController extends Controller
     {
         // $urls = DB::table('urls')
         //     ->leftJoin('url_checks', 'urls.id', '=', 'url_checks.url_id')
-        //     ->select(DB::raw('DISCTINCT ON (url.name) urls.*, 
+        //     ->select(DB::raw('DISCTINCT ON (url.name) urls.*,
         //     url_checks.created_at as last_check_date, url_checks.status_code as status'))
         //     ->orderby('urls.name')
         //     ->orderby('urls.id')
