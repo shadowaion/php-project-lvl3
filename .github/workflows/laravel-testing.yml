@@ -37,8 +37,6 @@ jobs:
                     cp -f .env .env.testing
             -   name: NPM ci
                 run: npm ci
-            -   name: Install linter
-                run: make install
             -   name: Connect to SQLite
                 # Runs a script that creates a PostgreSQL client, populates
                 # the client with data, and retrieves data
