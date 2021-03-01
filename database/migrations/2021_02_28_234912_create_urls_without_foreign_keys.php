@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUrlsAgain extends Migration
+class CreateUrlsWithoutForeignKeys extends Migration
 {
     /**
      * Run the migrations.
@@ -26,7 +26,6 @@ class CreateUrlsAgain extends Migration
             $table->string('keywords')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();
-            $table->foreign('url_id')->references('id')->on('urls');
         });
     }
 
