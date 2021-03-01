@@ -18,13 +18,22 @@ class UrlController extends Controller
      */
     public function index()
     {
+        // $urls = DB::table('urls')
+        //     ->leftJoin('url_checks', 'urls.id', '=', 'url_checks.url_id')
+        //     ->select(DB::raw('DISCTINCT ON (url.name) urls.*, 
+        //     url_checks.created_at as last_check_date, url_checks.status_code as status'))
+        //     ->orderby('urls.name')
+        //     ->orderby('urls.id')
+        //     ->orderby('url_checks.created_at', 'desc')
+        //     ->get();
         $urls = DB::table('urls')
             ->leftJoin('url_checks', 'urls.id', '=', 'url_checks.url_id')
-            ->select(DB::raw('urls.*, 
-            url_checks.created_at as last_check_date, url_checks.status_code as status'))
+            ->select(DB::raw('urls.id, urls.name, 
+            MAX(url_checks.created_at) as last_check_date, MAX(url_checks.status_code) as status'))
+            ->groupby('urls.id')
             ->orderby('urls.name')
             ->orderby('urls.id')
-            ->orderby('url_checks.created_at', 'desc')
+            ->orderByRaw('MAX(url_checks.created_at) DESC')
             ->get();
         //var_dump($urls);
         return view('urls-index', ['urls' => $urls]);//
