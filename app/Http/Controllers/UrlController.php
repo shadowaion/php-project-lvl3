@@ -70,7 +70,7 @@ class UrlController extends Controller
         $normalizedUrlName = "{$normalizedScheme}://{$normalizedHost}";
         $createdUpdatedAt = Carbon::now()->toDateTimeString();
 
-        echo "\n-----------Store 3------------\n";
+        echo "\n-----------Store 3 {$normalizedUrlName}------------\n";
 
         try {
             echo "\n-----------Store 4------------\n";
@@ -212,7 +212,7 @@ class UrlController extends Controller
             $descriptionContent = $description[0]->getAttribute('content');
         }
 
-        echo "\n------------------Check 7-------------------\n";
+        echo "\n------------------Check 7 {$id}-------------------\n";
 
         try {
             echo "\n------------------Check 8-------------------\n";
