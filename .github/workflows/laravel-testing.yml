@@ -31,10 +31,6 @@ jobs:
                     tools: phpunit
             -   name: Composer (php-actions)
                 uses: php-actions/composer@v5
-            -   name: Prepare Laravel Application
-                run: |
-                    cp -f .env.ci .env
-                    cp -f .env .env.testing
             -   name: NPM ci
                 run: npm ci
             -   name: Connect to SQLite
