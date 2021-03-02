@@ -9,12 +9,8 @@ start:
 setup:
 	cp -n .env.example .env|| true
 	cp -n .env.example .env.testing|| true
-	ls -al
 	php artisan key:gen --ansi
 	touch database/database.sqlite
-	ls ./database -al
-	cat .env
-	cat .env.testing
 	php artisan migrate
 	php artisan db:seed
 
