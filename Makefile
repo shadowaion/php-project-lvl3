@@ -7,12 +7,11 @@ start:
 	php artisan serve
 
 setup:
-	cp -n .env.example .env|| true
-	cp -n .env.example .env.testing|| true
+	cp -n .env.example .env || true
+	cp -n .env.example .env.testing || true
 	php artisan key:gen --ansi
+	php artisan key:generate --env=testing
 	touch database/database.sqlite
-	cat .env.testing
-	cat .env
 	php artisan migrate
 	php artisan db:seed
 	npm install
