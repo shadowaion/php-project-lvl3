@@ -20,9 +20,6 @@ jobs:
                 with:
                     node-version: '14'
             -   name: Install front-end dependencies
-                run: |
-                  npm install
-                  npm run dev
             -   name: Setup PHP with pgsql
                 uses: shivammathur/setup-php@2.10.0
                 with:
@@ -31,19 +28,15 @@ jobs:
                     tools: phpunit
             -   name: Composer (php-actions)
                 uses: php-actions/composer@v5
-            -   name: NPM ci
-                run: npm ci
             -   name: Connect to SQLite
                 # Runs a script that creates a PostgreSQL client, populates
                 # the client with data, and retrieves data
                 run: make setup
                 # Environment variable used by the `client.js` script to create
                 # a new PostgreSQL client.
-            -   name: Composer update
-                run: |
-                    composer self-update
-            -   name: Install composer dependencies
-                run: sudo composer install --no-scripts
+            -   run: |
+                    npm ci
+                    npm run dev
             -   name: Cache dependencies
                 uses: actions/cache@v1
                 with:
