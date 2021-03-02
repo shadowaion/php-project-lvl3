@@ -221,9 +221,9 @@ class UrlController extends Controller
             ->upsert([
                 ['url_id' => $id,
                 'status_code' => $respStatusCode,
-                'h1' => $h1Text,
                 'keywords' => $keywordsContent,
                 'description' => $descriptionContent,
+                'h1' => $h1Text,
                 'updated_at' => $createdUpdatedAt,
                 'created_at' => $createdUpdatedAt],
             ], ['id'], ['updated_at']);
