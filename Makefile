@@ -11,6 +11,10 @@ setup:
 	cp -n .env.example .env.testing|| true
 	php artisan key:gen --ansi
 	touch database/database.sqlite
+	ls -al
+	cat .env
+	cat .env.testing
+	ls database -al
 	php artisan migrate
 	php artisan db:seed
 	npm install
