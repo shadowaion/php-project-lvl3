@@ -32,12 +32,6 @@ $app = require_once __DIR__.'/bootstrap/app.php';
 
 $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
 
-$filepath = __DIR__ . "/database/database.sqlite";
-
-if (!file_exists($filepath)) {
-    file_put_contents($filepath, '');
-}
-
 $status = $kernel->handle(
     $input = new Symfony\Component\Console\Input\ArgvInput,
     new Symfony\Component\Console\Output\ConsoleOutput
