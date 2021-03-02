@@ -59,21 +59,21 @@ class UrlController extends Controller
      */
     public function store(Request $request)
     {
-        echo "\n-----------Store 1------------\n";
+        //echo "\n-----------Store 1------------\n";
 
         $parsedUrl = parse_url($request->input('url.name'));
 
-        echo "\n-----------Store 2------------\n";
+        //echo "\n-----------Store 2------------\n";
 
         $normalizedScheme = mb_strtolower($parsedUrl["scheme"]);
         $normalizedHost = mb_strtolower($parsedUrl["host"]);
         $normalizedUrlName = "{$normalizedScheme}://{$normalizedHost}";
         $createdUpdatedAt = Carbon::now()->toDateTimeString();
 
-        echo "\n-----------Store 3 {$normalizedUrlName}------------\n";
+        //echo "\n-----------Store 3 {$normalizedUrlName}------------\n";
 
         try {
-            echo "\n-----------Store 4------------\n";
+            //echo "\n-----------Store 4------------\n";
 
             DB::table('urls')
             ->where('name', '=', $normalizedUrlName)
@@ -83,18 +83,18 @@ class UrlController extends Controller
                 'created_at' => $createdUpdatedAt],
             ], ['name'], ['updated_at']);
 
-            echo "\n-----------Store 5------------\n";
+            //echo "\n-----------Store 5------------\n";
 
             flash('Website successfully added!')->success();
 
-            echo "\n-----------Store 6------------\n";
+            //echo "\n-----------Store 6------------\n";
         } catch (Exception $e) {
-            echo "\n-----------Store 7------------\n";
+            //echo "\n-----------Store 7------------\n";
 
             $errorMessage = "Error: {$e->getMessage()}";
             flash($errorMessage)->error();
         }
-        echo "\n-----------Store 8------------\n";
+        //echo "\n-----------Store 8------------\n";
 
         return Redirect()->route('urls.index');//
     }
@@ -172,11 +172,11 @@ class UrlController extends Controller
         $keywordsContent = '';
         $descriptionContent = '';
 
-        echo "\n------------------Check 1-------------------\n";
+        //echo "\n------------------Check 1-------------------\n";
 
         $createdUpdatedAt = Carbon::now()->toDateTimeString();
 
-        echo "\n------------------Check 2-------------------\n";
+        //echo "\n------------------Check 2-------------------\n";
 
         $urls = DB::table('urls')
                 ->select(DB::raw('*'))
@@ -184,23 +184,23 @@ class UrlController extends Controller
                 ->orderby('name')
                 ->get();
 
-        echo "\n------------------Check 3-------------------\n";
+        //echo "\n------------------Check 3-------------------\n";
 
         $response = Http::get($urls[0]->name);
         $respStatusCode = $response->getStatusCode();
 
-        echo "\n------------------Check 4------------------\n";
+        //echo "\n------------------Check 4------------------\n";
 
         $document = new Document();
         $document->loadHtmlFile($urls[0]->name);
 
-        echo "\n------------------Check 5-------------------\n";
+        //echo "\n------------------Check 5-------------------\n";
 
         $h1 = $document->find('h1');
         $keywords = $document->find('meta[name=keywords]');
         $description = $document->find('meta[name=description]');
 
-        echo "\n------------------Check 6-------------------\n";
+        //echo "\n------------------Check 6-------------------\n";
 
         if (count($h1) > 0) {
             $h1Text = $h1[0]->innerHtml();
@@ -212,10 +212,10 @@ class UrlController extends Controller
             $descriptionContent = $description[0]->getAttribute('content');
         }
 
-        echo "\n------------------Check 7 {$id}-------------------\n";
+        //echo "\n------------------Check 7 {$id}-------------------\n";
 
         try {
-            echo "\n------------------Check 8-------------------\n";
+            //echo "\n------------------Check 8-------------------\n";
             
             DB::table('url_checks')
             ->upsert([
@@ -230,15 +230,15 @@ class UrlController extends Controller
 
             flash('Finished check!')->success();
 
-            echo "\n------------------Check 9-------------------\n";
+            //echo "\n------------------Check 9-------------------\n";
         } catch (Exception $e) {
-            echo "\n------------------Check 10-------------------\n";
+            //echo "\n------------------Check 10-------------------\n";
             $errorMessage = "Error: {$e->getMessage()}";
             flash($errorMessage)->error();
-            echo "\n------------------Check 11-------------------\n";
+            //echo "\n------------------Check 11-------------------\n";
         }
 
-        echo "\n------------------Check 12-------------------\n";
+        //echo "\n------------------Check 12-------------------\n";
 
         return Redirect()->route('urls.show', ['id' => $id]);//
     }
