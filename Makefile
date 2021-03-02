@@ -7,7 +7,6 @@ start:
 	php artisan serve
 
 setup:
-	composer install
 	cp -n .env.example .env|| true
 	cp -n .env.example .env.testing|| true
 	php artisan key:gen --ansi
