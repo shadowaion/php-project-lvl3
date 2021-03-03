@@ -48,7 +48,6 @@ class UrlCheckController extends Controller
 
         //echo "\n------------------Check 0.1-------------------\n";
 
-        
         //echo "\n------------------Check 1-------------------\n";
 
         $createdUpdatedAt = Carbon::now()->toDateTimeString();
@@ -110,7 +109,7 @@ class UrlCheckController extends Controller
 
         try {
             //echo "\n------------------Check 8-------------------\n";
-            
+
             DB::table('url_checks')
             ->upsert([
                 ['url_id' => $id,

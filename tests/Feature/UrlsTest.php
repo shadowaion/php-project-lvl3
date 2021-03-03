@@ -50,10 +50,10 @@ class UrlsTest extends TestCase
         $name2 = 'https://example.org/blogs';
         $name3 = 'https://youtube.com';
         $response = $this->post(route('urls.store'), ['url' => ['name' => $name1]]);
-        
+
         // echo "\n------------------Response store-------------------\n";
         // var_dump($response);
-        
+
         $response->assertRedirect(route('urls.index'));
     }
 

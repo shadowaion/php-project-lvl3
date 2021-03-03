@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class UrlCheck extends Model
 {
+    // @codingStandardsIgnoreStart
     use HasFactory;
+    // @codingStandardsIgnoreEnd
     public $timestamps = false;
 
     protected $attributes = [

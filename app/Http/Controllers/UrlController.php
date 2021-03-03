@@ -119,12 +119,12 @@ class UrlController extends Controller
             ->where('url_id', '=', $id)
             ->orderby('created_at', 'desc')
             ->get();
-        
+
         // echo "\n-----------urls------------\n";
         // var_dump($urls);
         // echo "\n-----------urlChecks------------\n";
         // var_dump($urlChecks);
-        
+
         return view('urls-show', ['urls' => $urls, 'urlChecks' => $urlChecks]);//
     }
 
@@ -220,7 +220,7 @@ class UrlController extends Controller
 
         try {
             //echo "\n------------------Check 8-------------------\n";
-            
+
             DB::table('url_checks')
             ->upsert([
                 ['url_id' => $id,
