@@ -66,6 +66,8 @@ class UrlCheckController extends Controller
         $document = new Document();
         $document->loadHtmlFile($urls[0]->name);
 
+        var_dump($urls[0]->name);
+        //dd($document);
         //echo "\n------------------Check 5-------------------\n";
 
         $h1 = $document->find('h1');
@@ -75,7 +77,7 @@ class UrlCheckController extends Controller
         //echo "\n------------------Check 6-------------------\n";
 
         if (count($h1) > 0) {
-            $h1Text = $h1[0]->innerHtml();
+            $h1Text = strip_tags($h1[0]->innerHtml());
         }
         if (count($keywords) > 0) {
             $keywordsContent = $keywords[0]->getAttribute('content');
@@ -83,6 +85,9 @@ class UrlCheckController extends Controller
         if (count($description) > 0) {
             $descriptionContent = $description[0]->getAttribute('content');
         }
+        //echo "\n------------------h1 = {$h1Text}-------------------\n";
+        //echo "\n------------------keys = {$keywordsContent}-------------------\n";
+        //echo "\n------------------decr = {$descriptionContent}-------------------\n";
 
         //echo "\n------------------Check 7 {$id}-------------------\n";
 

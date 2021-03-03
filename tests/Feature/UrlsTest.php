@@ -48,7 +48,8 @@ class UrlsTest extends TestCase
         $url = route('urls.index');
         $name1 = 'https://example.com/blog/posts/how-to-test-code';
         $name2 = 'https://example.org/blogs';
-        $response = $this->post(route('urls.store'), ['url' => ['name' => $name2]]);
+        $name3 = 'https://youtube.com';
+        $response = $this->post(route('urls.store'), ['url' => ['name' => $name3]]);
         
         // echo "\n------------------Response store-------------------\n";
         // var_dump($response);
@@ -74,7 +75,7 @@ class UrlsTest extends TestCase
     }
     public function testCheck()
     {
-        $id = 1;
+        $id = 12;
 
         Http::fake();
 
