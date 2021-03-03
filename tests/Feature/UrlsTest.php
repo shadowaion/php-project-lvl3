@@ -77,8 +77,6 @@ class UrlsTest extends TestCase
     {
         $id = 1;
 
-        Http::fake();
-
         $response1 = $this->post(route('urls.check', ['id' => $id]));
 
         // echo "\n------------------Response Check-------------------\n";

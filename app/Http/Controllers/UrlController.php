@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
@@ -172,6 +173,9 @@ class UrlController extends Controller
         $keywordsContent = '';
         $descriptionContent = '';
 
+        if (config('app.env') == 'testing') {
+            Http::fake();
+        }
         //echo "\n------------------Check 1-------------------\n";
 
         $createdUpdatedAt = Carbon::now()->toDateTimeString();
