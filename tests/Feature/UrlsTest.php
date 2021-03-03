@@ -79,6 +79,7 @@ class UrlsTest extends TestCase
 
         $response1 = $this->post(route('urls.check', ['id' => $id]));
 
+        //var_dump($response1);
         // echo "\n------------------Response Check-------------------\n";
         // var_dump($response);
 

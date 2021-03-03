@@ -40,20 +40,20 @@ class UrlCheckController extends Controller
      */
     public function store(Request $request, int $id)
     {
-        echo "\n------------------Check 0-------------------\n";
+        //echo "\n------------------Check 0-------------------\n";
 
         $h1Text = '';
         $keywordsContent = '';
         $descriptionContent = '';
 
-        echo "\n------------------Check 0.1-------------------\n";
+        //echo "\n------------------Check 0.1-------------------\n";
 
         
-        echo "\n------------------Check 1-------------------\n";
+        //echo "\n------------------Check 1-------------------\n";
 
         $createdUpdatedAt = Carbon::now()->toDateTimeString();
 
-        echo "\n------------------Check 2-------------------\n";
+        //echo "\n------------------Check 2-------------------\n";
 
         $urls = DB::table('urls')
                 ->select(DB::raw('*'))
@@ -63,7 +63,7 @@ class UrlCheckController extends Controller
 
         //echo "\n------------------Check 3-------------------\n";
         if (config('app.env') == 'testing') {
-            echo "\n------------------Check 0.2-------------------\n";
+            //echo "\n------------------Check 0.2-------------------\n";
             Http::fake();
         }
 
@@ -73,11 +73,17 @@ class UrlCheckController extends Controller
 
         //dd($response);
         //echo "\n------------------Check 4------------------\n";
+        $body = $response->getBody();
+        $content = $body->getContents();
+        if (empty($content)) {
+            $content = '<div></div>';
+        }
+        //echo "||||=={$content}==|||||";
+        //dd($content);
+        $document = new Document($content);
+        //$document->loadHtmlFile($urls[0]->name);
 
-        $document = new Document();
-        $document->loadHtmlFile($urls[0]->name);
-
-        var_dump($urls[0]->name);
+        //var_dump($urls[0]->name);
         //dd($document);
         //echo "\n------------------Check 5-------------------\n";
 
@@ -96,9 +102,9 @@ class UrlCheckController extends Controller
         if (count($description) > 0) {
             $descriptionContent = $description[0]->getAttribute('content');
         }
-        echo "\n------------------h1 = {$h1Text}-------------------\n";
-        echo "\n------------------keys = {$keywordsContent}-------------------\n";
-        echo "\n------------------decr = {$descriptionContent}-------------------\n";
+        //echo "\n------------------h1 = {$h1Text}-------------------\n";
+        //echo "\n------------------keys = {$keywordsContent}-------------------\n";
+        //echo "\n------------------decr = {$descriptionContent}-------------------\n";
 
         //echo "\n------------------Check 7 {$id}-------------------\n";
 
