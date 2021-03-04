@@ -31,9 +31,9 @@ class UrlController extends Controller
             ->leftJoin('url_checks', 'urls.id', '=', 'url_checks.url_id')
             ->select(DB::raw('urls.id, urls.name, 
             MAX(url_checks.created_at) as last_check_date, MAX(url_checks.status_code) as status'))
-            ->groupby('urls.id')
-            ->orderby('urls.name')
-            ->orderby('urls.id')
+            ->groupBy('urls.id')
+            ->orderBy('urls.name')
+            ->orderBy('urls.id')
             ->orderByRaw('MAX(url_checks.created_at) DESC')
             ->get();
         //echo "\n------------------urlsCont var_dump-------------------\n";
@@ -97,7 +97,7 @@ class UrlController extends Controller
         }
         //echo "\n-----------Store 8------------\n";
 
-        return Redirect()->route('urls.index');//
+        return redirect()->route('urls.index');//
     }
 
     /**
@@ -111,13 +111,13 @@ class UrlController extends Controller
         $urls = DB::table('urls')
             //->select(DB::raw('*'))
             ->where('id', '=', $id)
-            ->orderby('name')
+            ->orderBy('name')
             ->get();
 
         $urlChecks = DB::table('url_checks')
             //->select(DB::raw('*'))
             ->where('url_id', '=', $id)
-            ->orderby('created_at', 'desc')
+            ->orderBy('created_at', 'desc')
             ->get();
 
         // echo "\n-----------urls------------\n";
@@ -185,7 +185,7 @@ class UrlController extends Controller
         $urls = DB::table('urls')
                 ->select(DB::raw('*'))
                 ->where('id', '=', $id)
-                ->orderby('name')
+                ->orderBy('name')
                 ->get();
 
         //echo "\n------------------Check 3-------------------\n";

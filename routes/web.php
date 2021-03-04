@@ -15,7 +15,7 @@ use App\Http\Controllers\UrlCheckController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function () : Illuminate\View\View {
     return view('main');
 })->name('mainPage');
 

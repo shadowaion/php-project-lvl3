@@ -18,7 +18,7 @@ class UrlCheckController extends Controller
      */
     public function index()
     {
-        //
+        return view('welcome');//
     }
 
     /**
@@ -28,7 +28,7 @@ class UrlCheckController extends Controller
      */
     public function create()
     {
-        //
+        return view('welcome');//
     }
 
     /**
@@ -57,7 +57,7 @@ class UrlCheckController extends Controller
         $urls = DB::table('urls')
                 ->select(DB::raw('*'))
                 ->where('id', '=', $id)
-                ->orderby('name')
+                ->orderBy('name')
                 ->get();
 
         //echo "\n------------------Check 3-------------------\n";
@@ -66,7 +66,7 @@ class UrlCheckController extends Controller
             Http::fake();
         }
 
-        //Http::fake();
+        Http::fake();
         $response = Http::get($urls[0]->name);
         $respStatusCode = $response->getStatusCode();
 
@@ -74,7 +74,7 @@ class UrlCheckController extends Controller
         //echo "\n------------------Check 4------------------\n";
         $body = $response->getBody();
         $content = $body->getContents();
-        if (empty($content)) {
+        if ($content === '') {
             $content = '<div></div>';
         }
         //echo "||||=={$content}==|||||";
@@ -133,7 +133,7 @@ class UrlCheckController extends Controller
 
         //echo "\n------------------Check 12-------------------\n";
 
-        return Redirect()->route('urls.show', ['id' => $id]);//
+        return redirect()->route('urls.show', ['id' => $id]);//
     }
 
     /**
@@ -144,7 +144,7 @@ class UrlCheckController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('welcome');//
     }
 
     /**
@@ -155,7 +155,7 @@ class UrlCheckController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('welcome');//
     }
 
     /**
@@ -167,7 +167,7 @@ class UrlCheckController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return view('welcome');//
     }
 
     /**
@@ -178,6 +178,6 @@ class UrlCheckController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return view('welcome');//
     }
 }
