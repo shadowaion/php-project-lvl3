@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use DiDom\Document;
 use Carbon\Carbon;
 
@@ -57,7 +58,7 @@ class UrlController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function store(Request $request)
     {
@@ -166,7 +167,7 @@ class UrlController extends Controller
      * Check the specified resource.
      *
      * @param  int  $id
-     * @return Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function check($id)
     {
@@ -245,6 +246,6 @@ class UrlController extends Controller
 
         //echo "\n------------------Check 12-------------------\n";
 
-        return Redirect()->route('urls.show', ['id' => $id]);//
+        return redirect()->route('urls.show', ['id' => $id]);//
     }
 }
