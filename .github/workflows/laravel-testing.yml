@@ -37,6 +37,4 @@ jobs:
                     chmod +x ./cc-test-reporter
                     ./cc-test-reporter before-build
                     $GITHUB_WORKSPACE/vendor/bin/phpunit tests/Feature --coverage-clover ./clover.xml
-                    ls -al
-                    ls build/logs -al
                     ./cc-test-reporter after-build --coverage-input-type clover
