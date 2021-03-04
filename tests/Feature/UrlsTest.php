@@ -24,7 +24,7 @@ class UrlsTest extends TestCase
     // {
     //     $this->seed();
     // }
-    public function testIndex()//: void
+    public function testIndex(): void
     {
         $response = $this->get(route('urls.index'));
 
@@ -42,10 +42,10 @@ class UrlsTest extends TestCase
 
         $response->assertStatus(200)->assertViewHas('urls');
 
-        //return;
+        return;
     }
 
-    public function testStore()//: void
+    public function testStore(): void
     {
         $url = route('urls.index');
         $name1 = 'https://example.com/blog/posts/how-to-test-code';
@@ -58,10 +58,10 @@ class UrlsTest extends TestCase
 
         $response->assertRedirect(route('urls.index'));
 
-        //return;
+        return;
     }
 
-    public function testShow()//: void
+    public function testShow(): void
     {
         // echo "\n------------------DB query-------------------\n";
         // $urls = DB::table('urls')
@@ -77,10 +77,10 @@ class UrlsTest extends TestCase
 
         $response->assertViewHas('urls');
 
-        //return;
+        return;
     }
 
-    public function testCheck()//: void
+    public function testCheck(): void
     {
         $id = 1;
 
@@ -92,6 +92,6 @@ class UrlsTest extends TestCase
 
         $response1->assertRedirect(route('urls.show', ['id' => $id]));
 
-        //return;
+        return;
     }
 }
