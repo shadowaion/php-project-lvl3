@@ -42,7 +42,7 @@ class UrlsTest extends TestCase
 
         $response->assertStatus(200)->assertViewHas('urls');
 
-        //return;
+        return;
     }
 
     public function testStore(): void
@@ -58,7 +58,7 @@ class UrlsTest extends TestCase
 
         $response->assertRedirect(route('urls.index'));
 
-        //return;
+        return;
     }
 
     public function testShow(): void
@@ -77,7 +77,7 @@ class UrlsTest extends TestCase
 
         $response->assertViewHas('urls');
 
-        //return;
+        return;
     }
 
     public function testCheck(): void
@@ -92,6 +92,6 @@ class UrlsTest extends TestCase
 
         $response1->assertRedirect(route('urls.show', ['id' => $id]));
 
-        //return;
+        return;
     }
 }
