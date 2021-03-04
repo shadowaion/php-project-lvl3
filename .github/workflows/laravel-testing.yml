@@ -38,4 +38,5 @@ jobs:
                     ./cc-test-reporter before-build
                     $GITHUB_WORKSPACE/vendor/bin/phpunit tests --coverage-clover ./clover.xml
                     ls -al
+                    ls build/logs -al
                     ./cc-test-reporter after-build --coverage-input-type clover
