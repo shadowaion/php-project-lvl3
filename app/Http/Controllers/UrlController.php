@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Http;
+use Illuminate\View\View;
 use DiDom\Document;
 use Carbon\Carbon;
 
@@ -15,7 +16,7 @@ class UrlController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Illuminate\View\View
+     * @return View
      */
     public function index()
     {
@@ -44,7 +45,7 @@ class UrlController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Illuminate\View\View
+     * @return View
      */
     public function create()
     {
@@ -56,7 +57,7 @@ class UrlController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return Illuminate\View\View
+     * @return View
      */
     public function store(Request $request)
     {
@@ -104,7 +105,7 @@ class UrlController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return Illuminate\View\View
+     * @return View
      */
     public function show($id)
     {
@@ -132,7 +133,7 @@ class UrlController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return Illuminate\View\View
+     * @return View
      */
     public function edit($id)
     {
@@ -144,7 +145,7 @@ class UrlController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return Illuminate\View\View
+     * @return View
      */
     public function update(Request $request, $id)
     {
@@ -155,7 +156,7 @@ class UrlController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return Illuminate\View\View
+     * @return View
      */
     public function destroy($id)
     {
@@ -165,7 +166,7 @@ class UrlController extends Controller
      * Check the specified resource.
      *
      * @param  int  $id
-     * @return Illuminate\View\View
+     * @return View
      */
     public function check($id)
     {
