@@ -10,7 +10,10 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use DiDom\Document;
+use DiDom\Element;
+use DOMElement;
 use Carbon\Carbon;
+use Exception;
 
 class UrlController extends Controller
 {
