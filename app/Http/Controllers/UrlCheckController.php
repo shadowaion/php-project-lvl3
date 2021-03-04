@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
 use DiDom\Document;
 use Carbon\Carbon;
+use Exception;
 
 class UrlCheckController extends Controller
 {
@@ -37,7 +38,7 @@ class UrlCheckController extends Controller
      *
      * @param  int  $id
      * @param  \Illuminate\Http\Request  $request
-     * @return View
+     * @return Illuminate\Http\RedirectResponse
      */
     public function store(Request $request, int $id)
     {

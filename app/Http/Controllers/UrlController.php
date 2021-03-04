@@ -57,7 +57,7 @@ class UrlController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return View
+     * @return Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -166,7 +166,7 @@ class UrlController extends Controller
      * Check the specified resource.
      *
      * @param  int  $id
-     * @return View
+     * @return Illuminate\Http\RedirectResponse
      */
     public function check($id)
     {
