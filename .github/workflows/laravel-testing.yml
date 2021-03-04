@@ -35,6 +35,6 @@ jobs:
                 run: |
                     curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
                     chmod +x ./cc-test-reporter
-                    ./cc-test-reporter before-build
-                    $GITHUB_WORKSPACE/vendor/bin/phpunit tests/Feature --coverage-clover ./clover.xml
-                    ./cc-test-reporter after-build -d --coverage-input-type clover
+                    ./cc-test-reporter before-build --help
+                    $GITHUB_WORKSPACE/vendor/bin/phpunit tests --coverage-clover ./clover.xml --help
+                    ./cc-test-reporter after-build -d --coverage-input-type clover --help
