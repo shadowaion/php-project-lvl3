@@ -24,14 +24,6 @@ class UrlController extends Controller
      */
     public function index()
     {
-        // $urls = DB::table('urls')
-        //     ->leftJoin('url_checks', 'urls.id', '=', 'url_checks.url_id')
-        //     ->select(DB::raw('DISCTINCT ON (url.name) urls.*,
-        //     url_checks.created_at as last_check_date, url_checks.status_code as status'))
-        //     ->orderby('urls.name')
-        //     ->orderby('urls.id')
-        //     ->orderby('url_checks.created_at', 'desc')
-        //     ->get();
         $urls = DB::table('urls')
             ->leftJoin('url_checks', 'urls.id', '=', 'url_checks.url_id')
             ->select(DB::raw('urls.id, urls.name, 
@@ -41,8 +33,6 @@ class UrlController extends Controller
             ->orderBy('urls.id')
             ->orderByRaw('MAX(url_checks.created_at) DESC')
             ->get();
-        //echo "\n------------------urlsCont var_dump-------------------\n";
-        //var_dump($urls);
         return view('urls-index', ['urls' => $urls]);//
     }
 
@@ -65,21 +55,15 @@ class UrlController extends Controller
      */
     public function store(Request $request)
     {
-        //echo "\n-----------Store 1------------\n";
 
         $parsedUrl = parse_url($request->input('url.name'));
-
-        //echo "\n-----------Store 2------------\n";
 
         $normalizedScheme = mb_strtolower($parsedUrl["scheme"]);
         $normalizedHost = mb_strtolower($parsedUrl["host"]);
         $normalizedUrlName = "{$normalizedScheme}://{$normalizedHost}";
         $createdUpdatedAt = Carbon::now()->toDateTimeString();
 
-        //echo "\n-----------Store 3 {$normalizedUrlName}------------\n";
-
         try {
-            //echo "\n-----------Store 4------------\n";
 
             DB::table('urls')
             ->where('name', '=', $normalizedUrlName)
@@ -89,18 +73,13 @@ class UrlController extends Controller
                 'created_at' => $createdUpdatedAt],
             ], ['name'], ['updated_at']);
 
-            //echo "\n-----------Store 5------------\n";
-
             flash('Website successfully added!')->success();
 
-            //echo "\n-----------Store 6------------\n";
         } catch (Exception $e) {
-            //echo "\n-----------Store 7------------\n";
 
             $errorMessage = "Error: {$e->getMessage()}";
             flash($errorMessage)->error();
         }
-        //echo "\n-----------Store 8------------\n";
 
         return redirect()->route('urls.index');//
     }
@@ -114,21 +93,14 @@ class UrlController extends Controller
     public function show($id)
     {
         $urls = DB::table('urls')
-            //->select(DB::raw('*'))
             ->where('id', '=', $id)
             ->orderBy('name')
             ->get();
 
         $urlChecks = DB::table('url_checks')
-            //->select(DB::raw('*'))
             ->where('url_id', '=', $id)
             ->orderBy('created_at', 'desc')
             ->get();
-
-        // echo "\n-----------urls------------\n";
-        // var_dump($urls);
-        // echo "\n-----------urlChecks------------\n";
-        // var_dump($urlChecks);
 
         return view('urls-show', ['urls' => $urls, 'urlChecks' => $urlChecks]);//
     }
