@@ -10,9 +10,11 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use DiDom\Document;
 use DiDom\Element;
-use DOMElement;
 use Carbon\Carbon;
+use DOMElement;
 use Exception;
+
+use function DOMElement\text;
 
 class UrlCheckController extends Controller
 {
