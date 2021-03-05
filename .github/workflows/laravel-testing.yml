@@ -25,6 +25,7 @@ jobs:
                     php-version: '7.4'
                     extensions: curl, pgsql, pdo_pgsql
                     tools: phpunit
+                    coverage: xdebug
             -   name: Composer (php-actions)
                 uses: php-actions/composer@v5
             -   name: Connect to SQLite
