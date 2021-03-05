@@ -71,7 +71,7 @@ class UrlCheckController extends Controller
         }
 
         $document = new Document($content);
-        /** @var DiDom\Element[] $h1 */
+        /** @var Element[] $h1 */
         $h1 = $document->find('h1');
         $keywords = $document->find('meta[name=keywords]');
         $description = $document->find('meta[name=description]');
