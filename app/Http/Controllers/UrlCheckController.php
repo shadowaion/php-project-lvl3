@@ -87,7 +87,6 @@ class UrlCheckController extends Controller
             $descriptionContent = $description[0]->getAttribute('content');
         }
         try {
-
             DB::table('url_checks')
             ->upsert([
                 ['url_id' => $id,
@@ -98,9 +97,7 @@ class UrlCheckController extends Controller
                 'updated_at' => $createdUpdatedAt,
                 'created_at' => $createdUpdatedAt],
             ], ['id'], ['updated_at']);
-
             flash('Finished check!')->success();
-
         } catch (Exception $e) {
             $errorMessage = "Error: {$e->getMessage()}";
             flash($errorMessage)->error();

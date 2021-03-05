@@ -55,7 +55,6 @@ class UrlController extends Controller
      */
     public function store(Request $request)
     {
-
         $parsedUrl = parse_url($request->input('url.name'));
 
         $normalizedScheme = mb_strtolower($parsedUrl["scheme"]);
@@ -64,7 +63,6 @@ class UrlController extends Controller
         $createdUpdatedAt = Carbon::now()->toDateTimeString();
 
         try {
-
             DB::table('urls')
             ->where('name', '=', $normalizedUrlName)
             ->upsert([
@@ -74,9 +72,7 @@ class UrlController extends Controller
             ], ['name'], ['updated_at']);
 
             flash('Website successfully added!')->success();
-
         } catch (Exception $e) {
-
             $errorMessage = "Error: {$e->getMessage()}";
             flash($errorMessage)->error();
         }
