@@ -71,7 +71,7 @@ class UrlCheckController extends Controller
             Http::fake();
         }
 
-        Http::fake();
+        //Http::fake();
         $response = Http::get($urls[0]->name);
         $respStatusCode = $response->getStatusCode();
 
@@ -98,7 +98,7 @@ class UrlCheckController extends Controller
         //echo "\n------------------Check 6-------------------\n";
 
         if (count($h1) > 0) {
-            $h1Text = $h1[0]->text();
+            $h1Text = (string) strip_tags($h1[0]);
         }
         if (count($keywords) > 0) {
             $keywordsContent = $keywords[0]->getAttribute('content');
