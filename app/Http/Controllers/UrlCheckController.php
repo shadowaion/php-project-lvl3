@@ -98,7 +98,8 @@ class UrlCheckController extends Controller
         //echo "\n------------------Check 6-------------------\n";
 
         if (count($h1) > 0) {
-            $h1Text = strip_tags((string) $h1[0]);
+            /** @phpstan-ignore-next-line */
+            $h1Text = $h1[0]->text();
         }
         if (count($keywords) > 0) {
             $keywordsContent = $keywords[0]->getAttribute('content');
