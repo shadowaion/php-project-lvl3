@@ -41,7 +41,9 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "php\\project\\lvl3\\tests\\" : "tests",
+            "php\\project\\lvl3\\tests\\Feature\\" : "tests/Feature"
         }
     },
     "autoload-dev": {

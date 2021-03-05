@@ -4,6 +4,7 @@
 /storage/*.key
 /vendor
 /database/database.sqlite
+cc-test-reporter
 .env
 .env.backup
 .phpunit.result.cache
