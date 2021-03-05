@@ -14,8 +14,6 @@ use Carbon\Carbon;
 use DOMElement;
 use Exception;
 
-use function DiDom\Element\text;
-
 class UrlCheckController extends Controller
 {
     /**
