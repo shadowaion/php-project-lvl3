@@ -71,13 +71,12 @@ class UrlCheckController extends Controller
         }
 
         $document = new Document($content);
-
+        /** @var DiDom\Element[] $h1 */
         $h1 = $document->find('h1');
         $keywords = $document->find('meta[name=keywords]');
         $description = $document->find('meta[name=description]');
 
         if (count($h1) > 0) {
-            /** @phpstan-ignore-next-line */
             $h1Text = $h1[0]->text();
         }
         if (count($keywords) > 0) {
